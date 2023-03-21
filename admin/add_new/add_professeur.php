@@ -64,7 +64,6 @@
     <title>add_etudient</title>
 </head>
 <body>
-    <?php require '../../require/header.php';?>
 
     <div class="container">
         <div class="text-center mb4">

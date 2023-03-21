@@ -37,7 +37,6 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body>
-    <?php require '../../require/header.php'; ?>
     <div class="container">
         <div class="text-center mb4">
             <h1>Ajouter des organisme à la liste</h1>
