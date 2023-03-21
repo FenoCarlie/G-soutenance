@@ -1,0 +1,29 @@
+<?php
+
+
+$sql = "SELECT etudiant.matricule, etudiant.nom, etudiant.prenom, 
+        FROM etudiant
+        LEFT JOIN soutenir
+        ON etudiant.matricule = soutenance.matricule
+        WHERE soutenance.matricule IS NULL";
+$resultat = $conn->query($sql);
+
+
+if (!$resultat) {
+    die("Erreur dans la requête : " . $conn->error);
+}
+
+
+echo "<h1>Liste des étudiants n'ayant pas effectué de soutenance</h1>";
+if ($resultat->num_rows > 0) {
+    echo "<ul>";
+    while ($row = $resultat->fetch_assoc()) {
+        echo "<li>" . $row["matricule"] . $row["nom"] . " " . $row["prenom"] . "</li>";
+    }
+    echo "</ul>";
+} else {
+    echo "Aucun étudiant n'a été trouvé.";
+}
+
+$conn->close();
+?>
