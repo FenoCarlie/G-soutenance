@@ -1,0 +1,3 @@
+$('#myTable').DataTable( {
+    paging: true
+} );

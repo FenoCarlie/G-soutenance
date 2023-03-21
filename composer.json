@@ -1,0 +1,17 @@
+{
+    "name": "datatables/datatables",
+    "description": "^1.11",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Datatables\\Datatables\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "FENO Carlie",
+            "email": "95887231+FenoCarlie@users.noreply.github.com"
+        }
+    ],
+    "require": {}
+}
