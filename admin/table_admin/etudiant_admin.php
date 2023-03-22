@@ -14,8 +14,8 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
+    <div class="container-fluid mt-2">
+        <a class="navbar-brand" href="../admin.php">GESTION DES SOUTENANCES</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
@@ -26,17 +26,28 @@
                 Dropdown link
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                <li><a class="dropdown-item" href="../table_admin/organism_admin.php">organisme</a></li>
+                <li><a class="dropdown-item" href="../table_admin/professeur_admin.php">Professeur</a></li>
+                <li><a class="dropdown-item" href="../table_admin/soutenance_admin.php">soutenir</a></li>
+                <li><a class="dropdown-item" href="../table_admin/soutenir_admin.php">soutenue</a></li>
             </ul>
             </li>
         </ul>
         </div>
     </div>
     </nav>
-    <div class="container">
+    <div class="container mt-3">
+        <a href="../../admin/add_new/add_etudiant.php">Ajouter un nouveau etudiant</a>
+        
         <?php
+            if(isset($_GET['msg'])) {
+                $msg = $_GET['msg'];
+                echo '<div class="alert aler-warning alert-dismissible fade show" role="alert">
+                '.$msg.'
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>';
+            }
+
             $sql = "SELECT * FROM etudiant";
             $result = mysqli_query($conn, $sql);
             
@@ -44,7 +55,7 @@
             
             if (mysqli_num_rows($result) > 0) {
                 while($row = mysqli_fetch_assoc($result)) {
-                    echo '<table class="table table-hover">';
+                    echo '<table class="table table-hover text-center">';
                     echo '<thead>';
                     echo '<tr>
                             <th scope="col">Matricule</th>
@@ -65,8 +76,8 @@
                             <td>' . $row['parcours']. '</td>
                             <td>' . $row['adr_email']. '</td>
                             <td>
-                            <a href="" class="link-dark"><i class="fa-solid fa-pen-to-square fs-5 me-3" style="color: #2766d3;"></i></a>
-                            <a href="" class="link-dark"><i class="fa-solid fa-trash fs-5 me-3" style="color: #d12335;"></i></i></a>
+                            <a href="../modif/modif_etudiant.php?id=<?php echo $row["id"]?>" class="link-dark"><i class="fa-solid fa-pen-to-square fs-5 me-3" style="color: #2766d3;"></i></a>
+                            <a href="../delet/delet_etudiant.php" class="link-dark"><i class="fa-solid fa-trash fs-5 me-3" style="color: #d12335;"></i></i></a>
                             <a href="" class="link-dark"><button type="button" class="btn btn-info">Soutenir</button></i></a>
 
                             </td>
@@ -74,7 +85,7 @@
                     echo '</tbody>';
                 }
             } else {
-                echo '<div class="alert alert-dark" role="alert"><p class="h1">Aucun etudiant inscrit</p></div>';
+                echo '<div class="alert alert-dark mt-3" role="alert"><p class="h1">Aucun etudiant inscrit</p></div>';
             }
             
             echo "</table>";
