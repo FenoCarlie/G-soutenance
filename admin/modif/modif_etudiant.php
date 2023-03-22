@@ -16,22 +16,15 @@ if (isset($_POST['submit'])) {
         if(empty($matricule) || empty($niveau) || empty($nom) || empty($parcours)) {
             $error_msg = "Les champs Matricule, nom, Niveau et Parcours sont obligatoires.";
         }else {
-            // vérifie si un enregistrement avec le même matricule existe déjà
-            $resultat = mysqli_query($conn, "SELECT * FROM etudiant WHERE matricule='$matricule'");
-            if (mysqli_num_rows($resultat) > 0) {
-                // un enregistrement avec le même matricule existe déjà
-                $error_msg = "Un étudiant avec ce matricule existe déjà.";
-            } else {
-                // modifier l'enregistrement
-                $sql = "UPDATE `etudiant` SET `matricule`='$matricule',`nom`='$nom',`prenoms`='$prenoms',`niveau`='$niveau',`parcours`='$parcours',`adr_email`='$adr_email' WHERE id = $id";
-                $result = mysqli_query($conn, $sql);
+            // modifier l'enregistrement
+            $sql = "UPDATE `etudiant` SET `matricule`='$matricule',`nom`='$nom',`prenoms`='$prenoms',`niveau`='$niveau',`parcours`='$parcours',`adr_email`='$adr_email' WHERE id = $id";
+            $result = mysqli_query($conn, $sql);
 
-                if ($result) {
-                    header("Location: ../table_admin/etudiant_admin.php?msg=Modification reussite");
-                    exit();
-                } else {
-                    echo "Failed: " . mysqli_error($conn);
-                }
+            if ($result) {
+                header("Location: ../table_admin/etudiant_admin.php?msg=Modification reussite");
+                exit();
+            } else {
+                echo "Failed: " . mysqli_error($conn);
             }
         }
     }
@@ -51,7 +44,6 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body>
-    <?php require '../../require/header.php'; ?>
 
     <div class="container">
         <div class="text-center mb4">
