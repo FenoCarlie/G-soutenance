@@ -9,15 +9,27 @@ if (isset($_POST['submit'])) {
     if (empty($design) || empty($lieu)) {
         $error_msg = "Les champs Designation et Lieu sont obligatoires.";
     } else {
-        $sql = "INSERT INTO `organisme`(`design`, `lieu`) VALUES ('$design', '$lieu')";
+        $stmt = $conn->prepare("SELECT * FROM organisme WHERE design=?");
+        $stmt->bind_param("s", $design);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-        $result = mysqli_query($conn, $sql);
-
-        if ($result) {
-            header("Location: ../table_admin/organisme_admin.php?msg=Anregistrement reussite");
-            exit();
+        if ($result->num_rows > 0) {
+            // un enregistrement avec le même design existe déjà
+            $error_msg = "Un organisme avec ce designation existe déjà.";
         } else {
-            echo "Failed: " . mysqli_error($conn);
+            // insére un nouvel enregistrement
+            $stmt = $conn->prepare("INSERT INTO organisme(`design`, `lieu`)
+                        VALUES (?, ?)");
+            $stmt->bind_param("ss", $design, $lieu);
+            $stmt->execute();
+
+            if($stmt->affected_rows > 0) {
+                header("Location: ../table_admin/organisme_admin.php?msg=Anregistrement reussite");
+                exit();
+            } else {
+                echo "Erreur: " . $conn->error;
+            }
         }
     }
 }

@@ -66,14 +66,14 @@
 <body>
 
     <div class="container">
-        <div class="text-center mb4">
+        <div class="text-center mt-4">
             <h1>Ajouter des professeur à la liste</h1>
             <p>Complétez le formulaire ci-dessous pour ajouter un nouveau professeur</p>
         </div>
     </div>
 
     <div class="container d-flex justify-content-center">
-        <form action="" method="post" style="width:50vw; min-width:300px;">
+        <form class="mt-4" action="" method="post" style="width:50vw; min-width:300px;">
         <?php if(isset($error_msg)): ?>
             <div class="alert alert-danger"><?php echo $error_msg; ?></div>
         <?php endif; ?>

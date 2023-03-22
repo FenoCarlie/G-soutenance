@@ -37,9 +37,20 @@
     </div>
     </nav>
     <div class="container mt-3">
-        <a class="btn btn-primary mt-3" role="button" href="../../admin/add_new/add_organisme.php">Ajouter une nouvelle organisme</a>
         
         <?php
+        if (isset($_GET['msg'])) {
+            $msg = htmlspecialchars($_GET['msg']);
+            echo '<div class="alert alert-warning alert-dismissible fade show mt-3" role="alert">
+                    '.$msg.'
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>';
+        }
+        ?>
+        <a class="btn btn-outline-secondary mt-3" href="../../admin/add_new/add_organisme.php" role="button">Ajouter un nouvele organisme</a>
+        
+        <?php
+
             $sql = "SELECT * FROM organisme";
             $stmt = mysqli_prepare($conn, $sql);
             mysqli_stmt_execute($stmt);
@@ -52,7 +63,7 @@
                 echo '<tr>
                         <th scope="col">Designation</th>
                         <th scope="col">Lieu</th>
-                        <th scope="col">Action</th>
+                        <th scope="col">action</th>
                     </tr>';
                 echo '</thead>';
                 echo '<tbody>';
@@ -61,17 +72,13 @@
                             <td>' . htmlspecialchars($row['design']) . '</td>
                             <td>' . htmlspecialchars($row['lieu']) . '</td>
                             <td style="display: flex; justify-content: center;">
-                                <form action="../modif/modif_etudiant.php" method="POST">
+                                <form action="../modif/modif_organisme.php?idorg='. htmlspecialchars($row["idorg"]) .'" method="POST">
                                     <input type="hidden" name="idorg" value="' . htmlspecialchars($row['idorg']) . '">
-                                    <button type="submit" class="btn btn-link"><i class="fa-solid fa-pen-to-square fs-5" style="color: #2766d3;"></i></button>
+                                    <button type="submit" class="btn btn-link" ><i class="fa-solid fa-pen-to-square fs-5" style="color: #2766d3;"></i></button>
                                 </form>
-                                <form action="../delet/delet_etudiant.php" method="POST" onsubmit="return confirm(\'Êtes-vous sûr de vouloir supprimer cet étudiant ?\')">
+                                <form action="../delet/delet_organisme.php?idorg='. htmlspecialchars($row["idorg"]) .'" method="POST" onsubmit="return confirm(\'Êtes-vous sûr de vouloir supprimer cet organisme ?\')">
                                     <input type="hidden" name="idorg" value="' . htmlspecialchars($row['idorg']) . '">
                                     <button type="submit" class="btn btn-link"><i class="fa-solid fa-trash fs-5" style="color: #d12335;"></i></button>
-                                </form>
-                                <form action="../souten/soutenir.php" method="POST">
-                                    <input type="hidden" name="idorg" value="' . htmlspecialchars($row['idorg']) . '">
-                                    <button type="submit" class="btn btn-info">Soutenir</button>
                                 </form>
                             </td>
                         </tr>';
@@ -79,7 +86,7 @@
                 echo '</tbody>';
                 echo '</table>';
             } else {
-                echo '<div class="alert alert-dark mt-3" role="alert"><p class="h1">Aucun étudiant inscrit</p></div>';
+                echo '<div class="alert alert-dark mt-3" role="alert"><p class="h1">Aucun organisme inscrit</p></div>';
             }
         ?>
     </div>

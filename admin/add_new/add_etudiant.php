@@ -2,31 +2,31 @@
 require '../../require/connection_DB.php';
 
 if(isset($_POST['submit'])) {
-    $first_name = $_POST['prenoms'];
+    $prenoms = $_POST['prenoms'];
     if (isset($_POST['niveau'])) {
-        $level = $_POST['niveau'];
+        $niveau = $_POST['niveau'];
     } else {
-        $level = "";
+        $niveau = "";
     }
     if (isset($_POST['parcours'])) {
-        $program = $_POST['parcours'];
+        $parcours = $_POST['parcours'];
     } else {
-        $program = "";
+        $parcours = "";
     }
-    $email = $_POST['adr_email'];
-    $id = $_POST['matricule'];
-    $last_name = $_POST['nom'];
+    $adr_mail = $_POST['adr_email'];
+    $matricule = $_POST['matricule'];
+    $nom = $_POST['nom'];
     
-    if (strlen($last_name) < 2) {
+    if (strlen($nom) < 2) {
         $error_msg = "Le nom doit contenir au moins deux caractères.";
     } else {
         // vérifie si les champs obligatoires sont remplis
-        if(empty($id) || empty($level) || empty($last_name) || empty($program)) {
+        if(empty($matricule) || empty($matricule) || empty($nom) || empty($parcours)) {
             $error_msg = "Les champs Matricule, nom, Niveau et Parcours sont obligatoires.";
         } else {
             // vérifie si un enregistrement avec le même matricule existe déjà
             $stmt = $conn->prepare("SELECT * FROM etudiant WHERE matricule=?");
-            $stmt->bind_param("s", $id);
+            $stmt->bind_param("s", $matricule);
             $stmt->execute();
             $result = $stmt->get_result();
 
@@ -37,7 +37,7 @@ if(isset($_POST['submit'])) {
                 // insére un nouvel enregistrement
                 $stmt = $conn->prepare("INSERT INTO etudiant(`matricule`, `nom`, `prenoms`, `niveau`, `parcours`, `adr_email`)
                             VALUES (?, ?, ?, ?, ?, ?)");
-                $stmt->bind_param("ssssss", $id, $last_name, $first_name, $level, $program, $email);
+                $stmt->bind_param("ssssss", $matricule, $nom, $prenoms, $niveau, $parcours, $adr_mail);
                 $stmt->execute();
 
                 if($stmt->affected_rows > 0) {
