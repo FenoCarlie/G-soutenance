@@ -36,7 +36,7 @@
         </div>
     </div>
     </nav>
-    <div class="container mt-3">
+    <div class= " mt-3">
         <?php
         if (isset($_GET['msg'])) {
             $msg = htmlspecialchars($_GET['msg']);
@@ -48,7 +48,7 @@
         ?>
         <?php
 
-            $sql = "SELECT soutenir.id as s_id, soutenir.note as s_note, soutenir.annee_univ as s_annee_univ, soutenir.date as s_date,
+            $sql = "SELECT soutenir.id as s_id , soutenir.annee_univ as s_annee_univ, soutenir.date as s_date,
                            soutenir.matricule as s_matricule, etudiant.nom as e_nom, etudiant.prenoms as e_prenoms, etudiant.niveau as e_niveau, etudiant.parcours as e_parcours,
                            organisme.design as o_design,
                            p1.civilite as president_civilite, p1.nom as president_nom, p1.prenoms as president_prenoms,
@@ -68,8 +68,8 @@
             $result = mysqli_stmt_get_result($stmt);
 
             if (mysqli_num_rows($result) > 0) {
-                echo '<div class="text-center m-2 "><h1>TABLES SOUTENANCE</h1></div>';
-                echo '<table class="table table-hover text-center m-3">';
+                echo '<div class="text-center m-2 "><h1>TABLES SOUTENANCE A PROGRAMER</h1></div>';
+                echo '<table class="table table-hover text-center m-3 border border-danger">';
                 echo '<thead>';
                 echo '<tr>
                         <th scope="col">Matricule</th>
@@ -98,19 +98,12 @@
                             <td>' . htmlspecialchars($row['s_r_ext']) . '</td>
                             <td>' . htmlspecialchars($row['s_date']) . '</td>
                             <td>' . htmlspecialchars($row['s_annee_univ']) . '</td>
-                            <td style="row row-cols-auto">
-                                <form class="col" action="../modif/modif_etudiant.php?id='. htmlspecialchars($row['s_id']) .'" method="POST" style="display: inline">
-                                    <input type="hidden" name="id" value="' . htmlspecialchars($row['s_id']) . '">
-                                    <button type="submit" class="btn btn-link" ><i class="fa-solid fa-pen-to-square fs-5" style="color: #2766d3;"></i></button>
-                                </form>
-                                <form class="col" action="../delet/delet_etudiant.php?id='. htmlspecialchars($row["s_id"]) .'" method="POST" style="display: inline" onsubmit="return confirm(\'Êtes-vous sûr de vouloir supprimer cet étudiant ?\')">
-                                    <input type="hidden" name="id" value="' . htmlspecialchars($row['s_id']) . '">
-                                    <button type="submit" class="btn btn-link"><i class="fa-solid fa-trash fs-5" style="color: #d12335;"></i></button>
-                                </form>
-                                <form class="col" action="../soutenance/soutenir.php?id='. htmlspecialchars($row["s_id"]) .'" method="POST" style="display: inline">
-                                    <input type="hidden" name="id" value="' . htmlspecialchars($row['s_id']) . '">
+                            <td>
+                                <a href="../modif/modif_etudiant.php?id='. htmlspecialchars($row['s_id']) .'"><i class="fa-solid fa-pen-to-square fs-5 ml-2" style="color: #2766d3;"></i></a>
+                                <a href="../modif/modif_etudiant.php?id='. htmlspecialchars($row['s_id']) .'"><i class="fa-solid fa-trash fs-5 ml-2" style="color: #d12335;"></i></a>
+                                <a href="../soutenance/soutenir.php?id='. htmlspecialchars($row["s_id"]) .'">
                                     <button type="submit" class="btn btn-info">Soutenir</button>
-                                </form>
+                                </a>
                             </td>
                         </tr>';
                 }

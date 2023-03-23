@@ -28,7 +28,6 @@
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <li><a class="dropdown-item" href="../table_admin/etudiant_admin.php">Etudiant</a></li>
                 <li><a class="dropdown-item" href="../table_admin/professeur_admin.php">Professeur</a></li>
-                <li><a class="dropdown-item" href="../table_admin/soutenance_admin.php">soutenue</a></li>
                 <li><a class="dropdown-item" href="../table_admin/soutenir_admin.php">soutenir</a></li>
             </ul>
             </li>
