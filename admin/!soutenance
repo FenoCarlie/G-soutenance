@@ -1,7 +1,5 @@
 <?php
-
-
-$sql = "SELECT etudiant.matricule, etudiant.nom, etudiant.prenom, 
+$sql = "SELECT etudiant.matricule, etudiant.nom, etudiant.prenoms, 
         FROM etudiant
         LEFT JOIN soutenir
         ON etudiant.matricule = soutenance.matricule
