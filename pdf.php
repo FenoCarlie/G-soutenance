@@ -3,7 +3,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>PROCES VERBAL</title>
-    <style>
+    
+<style>
     @page {
         size: A4;
         margin: 2cm;
@@ -53,27 +54,28 @@
         text-decoration: underline;
     }
 </style>
+
 	
 </head>
 <body>
     <div>
     <div class="header">
-    <h3>PROCES VERBAL</h3>
-    <h3>SOUTENANCE DE FIN D’ETUDES POUR L’OBTENTION DU DIPLOME DE LICENCE PROFESSIONNELLE</h3>
-    <div>
-        <h3 class="inline">Mention :</h3>
-        <p class="inline">Informatique</p>
+        <h3>PROCES VERBAL</h3>
+        <h3>SOUTENANCE DE FIN D’ETUDES POUR L’OBTENTION DU DIPLOME DE LICENCE PROFESSIONNELLE</h3>
+        <div style="text-align: center;">
+            <h3 class="inline">Mention :</h3>
+            <p class="inline">Informatique</p>
+        </div>
+        <div style="text-align: center;">
+            <h3 class="inline">Parcours :</h3>
+            <p class="inline">Informatique général</p>
+        </div>
     </div>
-    <div>
-        <h3 class="inline">Parcours :</h3>
-        <p class="inline">Informatique général</p>
-    </div>
-</div>
 
 <div class="jury">
-    <p>Mr/Mlle RAKOTO Gilbert a soutenu publiquement son mémoire de fin d’études pour l’obtention du diplôme de Licence professionnelle.</p>
+    <p>Mr/Mlle RAKOTO Gilbert</p>
+    <p>a soutenu publiquement son mémoire de fin d’études pour l’obtention du diplôme de Licence professionnelle.</p>
     <p>Après la délibération, la commission des membres du Jury a attribué la note de 18/20 (dix-huit sur vingt).</p>
-    <p>Après la présentation orale de Mr/Mlle RAKOTO Gilbert et la délibération de la commission des membres du Jury, la note de 18/20 (dix-huit sur vingt) a été attribuée.</p>
     <p class="underline">Membres du Jury</p>
     <div>
         <h3 class="inline">Président :</h3>

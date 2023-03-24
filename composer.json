@@ -13,5 +13,7 @@
             "email": "95887231+FenoCarlie@users.noreply.github.com"
         }
     ],
-    "require": {}
+    "require": {
+        "spipu/html2pdf": "^4.6"
+    }
 }
