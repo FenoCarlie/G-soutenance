@@ -1,0 +1,42 @@
+<?php
+                $sql = "SELECT * FROM professeur";
+                $stmt = mysqli_prepare($conn, $sql);
+                mysqli_stmt_execute($stmt);
+                $result = mysqli_stmt_get_result($stmt);
+
+                if (mysqli_num_rows($result) > 0){
+                    echo '<div class="col">';
+                    echo '<label class="form-label">Président des jurys</label>';
+                    echo '<select class="form-select" aria-label="Default select example" name="president">';
+                    echo '<option disabled selected value="">Choisissez un président des jurys</option>';
+                    while($row = mysqli_fetch_assoc($result)){
+                        echo '<option value="'. htmlspecialchars($row['idprof']) .'">'. htmlspecialchars($row['civilite']) . ' ' . htmlspecialchars($row['nom']) . ' ' . htmlspecialchars($row['prenoms']) .'</option>';
+                    }
+                    echo '</select>';
+                    echo '</div>';
+                    mysqli_data_seek($result, 0);
+
+                    echo '<div class="col">';
+                    echo '<label class="form-label">Examinateur</label>';
+                    echo '<select class="form-select" aria-label="Default select example" name="examinateur">';
+                    echo '<option disabled selected value="">Choisissez un examinateur</option>';
+                    while($row = mysqli_fetch_assoc($result)){
+                        echo '<option value="'. htmlspecialchars($row['idprof']) .'">'. htmlspecialchars($row['civilite']) . ' ' . htmlspecialchars($row['nom']) . ' ' . htmlspecialchars($row['prenoms']) .'</option>';
+                    }
+                    echo '</select>';
+                    echo '</div>';
+                    mysqli_data_seek($result, 0);
+
+                    echo '<div class="col">';
+                    echo '<label class="form-label">Rapporteur interne</label>';
+                    echo '<select class="form-select" aria-label="Default select example" name="rapporteur_int">';
+                    echo '<option disabled selected value="">Choisissez un rapporteur interne</option>';
+                    while($row = mysqli_fetch_assoc($result)){
+                        echo '<option value="'. htmlspecialchars($row['idprof']) .'">'. htmlspecialchars($row['civilite']) . ' ' . htmlspecialchars($row['nom']) . ' ' . htmlspecialchars($row['prenoms']) .'</option>';
+                    }
+                    echo '</select>';
+                    echo '</div>';
+                }else{
+                    echo '<div class="col"><input type="text" class="form-control" value="Pas de professeur inscrit" readonly></div>';
+                }
+            ?>

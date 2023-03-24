@@ -1,14 +1,13 @@
 <?php
 require '../../require/connection_DB.php';
 
-
 if(isset($_POST['submit'])) {
     $idorg = $_POST['idorg'];
     $president = $_POST['president'];
     $examinateur = $_POST['examinateur'];
-    $rapporteur_ext = $_POST['civilite' . ' ' . 'nom' . ' ' . 'prenom'];
+    $rapporteur_ext = $_POST['president'];
     $rapporteur_int = $_POST['rapporteur_int'];
-    $annee_unive = $_POST['annee_unive'];
+    $annee_univ = $_POST['annee_univ'];
     $matricule = $_POST['matricule'];
     $note = $_POST['note'];
     
@@ -16,8 +15,8 @@ if(isset($_POST['submit'])) {
         $error_msg = "Le format de l'année universitaire est incorrect, ex: 2000-2001";
     } else {
         // vérifie si les champs obligatoires sont remplis
-        if(empty($matricule) || empty($matricule) || empty($nom) || empty($parcours)) {
-            $error_msg = "Les champs Matricule, nom, Niveau et Parcours sont obligatoires.";
+        if(empty($matricule) || empty($note) || empty($date) || empty($organisme)) {
+            $error_msg = "Les champs Matricule, note, date et organisme sont obligatoires.";
         } else {
             // vérifie si un enregistrement avec le même matricule existe déjà
             $stmt = $conn->prepare("SELECT * FROM etudiant WHERE matricule=?");
@@ -30,9 +29,9 @@ if(isset($_POST['submit'])) {
                 $error_msg = "Un étudiant avec ce matricule existe déjà.";
             } else {
                 // insére un nouvel enregistrement
-                $stmt = $conn->prepare("INSERT INTO etudiant(`matricule`, `idorg`, `president`, `examinateur`, `parcours`, `adr_email`)
-                            VALUES (?, ?, ?, ?, ?, ?)");
-                $stmt->bind_param("ssssss", $matricule, $nom, $prenoms, $niveau, $parcours, $adr_mail);
+                $stmt = $conn->prepare("INSERT INTO etudiant(`matricule`, idorg, `annee_univ`, note, president, examinateur, raporteur_int, `raporteur_ext`)
+                            VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+                $stmt->bind_param("ssssssss", $matricule, $idorg, $annee_univ, $note, $president, $examinateur, $raporteur_int, $raporteur_ext);
                 $stmt->execute();
 
                 if($stmt->affected_rows > 0) {
@@ -44,8 +43,6 @@ if(isset($_POST['submit'])) {
             }
         }
     }
-
-    mysqli_close($conn);
 }
 ?>
 
@@ -88,8 +85,70 @@ if(isset($_POST['submit'])) {
                     <label class="form-label">Année universitaire</label>
                     <input type="text" class="form-control" name="annee_univ" placeholder="yyyy-yyyy" value="<?php if(isset($_POST['annee_univ'])) echo htmlspecialchars($_POST['annee_univ'], ENT_QUOTES); ?>">
                 </div>
+            <?php
+                $sql = "SELECT * FROM organisme";
+                $stmt = mysqli_prepare($conn, $sql);
+                mysqli_stmt_execute($stmt);
+                $result = mysqli_stmt_get_result($stmt);
+                
+                if (mysqli_num_rows($result) > 0){
+                    echo '<div class="col">';
+                    echo '<label class="form-label">Organisme</label>';
+                    echo '<select class="form-select" aria-label="Default select example" name="idorg">';
+                    echo '<option disabled selected value="">Choisissez un organisme</option>';
+                    while($row = mysqli_fetch_assoc($result)){
+                        echo '<option value="'. htmlspecialchars($row['idorg']) .' '.$selected.'">'. htmlspecialchars($row['design']) .'</option>';
+                    }
+                    echo '</select>';
+                    echo '</div>';
+                }else{
+                    echo '<div class="col"><label class="form-label">Organisme</label><input type="text" class="form-control" value="Pas d\'organisme inscrit" readonly></div>';
+                }
+            ?>
             </div>
-            <div class="row mb-3">
+            <?php
+                $sql = "SELECT * FROM professeur";
+                $stmt = mysqli_prepare($conn, $sql);
+                mysqli_stmt_execute($stmt);
+                $result = mysqli_stmt_get_result($stmt);
+                
+                if (mysqli_num_rows($result) > 0){
+                    echo '<div class="col mt-3">';
+                    echo '<label class="form-label">Président des jurys</label>';
+                    echo '<select class="form-select" aria-label="Default select example" name="president" onchange="updateSelects()">';
+                    echo '<option disabled selected value="">Choisissez un président des jurys</option>';
+                    while($row = mysqli_fetch_assoc($result)){
+                        echo '<option value="'. htmlspecialchars($row['idprof']) .'">'. htmlspecialchars($row['civilite']) . ' ' . htmlspecialchars($row['nom']) . ' ' . htmlspecialchars($row['prenoms']) .'</option>';
+                    }
+                    echo '</select>';
+                    echo '</div>';
+                    mysqli_data_seek($result, 0);
+                
+                    echo '<div class="col mt-3">';
+                    echo '<label class="form-label">Examinateur</label>';
+                    echo '<select class="form-select" aria-label="Default select example" name="examinateur" onchange="updateSelects()">';
+                    echo '<option disabled selected value="">Choisissez un examinateur</option>';
+                    while($row = mysqli_fetch_assoc($result)){
+                        echo '<option value="'. htmlspecialchars($row['idprof']) .'">'. htmlspecialchars($row['civilite']) . ' ' . htmlspecialchars($row['nom']) . ' ' . htmlspecialchars($row['prenoms']) .'</option>';
+                    }
+                    echo '</select>';
+                    echo '</div>';
+                    mysqli_data_seek($result, 0);
+                
+                    echo '<div class="col mt-3">';
+                    echo '<label class="form-label">Rapporteur interne</label>';
+                    echo '<select class="form-select" aria-label="Default select example" name="rapporteur_int" onchange="updateSelects()">';
+                    echo '<option disabled selected value="">Choisissez un rapporteur interne</option>';
+                    while($row = mysqli_fetch_assoc($result)){
+                        echo '<option value="'. htmlspecialchars($row['idprof']) .'">'. htmlspecialchars($row['civilite']) . ' ' . htmlspecialchars($row['nom']) . ' ' . htmlspecialchars($row['prenoms']) .'</option>';
+                    }
+                    echo '</select>';
+                    echo '</div>';
+                }else{
+                    echo '<div class="col"><label class="form-label">Membre du jury</label><input type="text" class="form-control" value="Pas de professeur inscrit" readonly></div>';
+                }
+            ?>
+            <div class="row mb-3 mt-3">
             <label class="form-label">Rapporteur extairne</label>
                 <div class="col">
                     <label class="form-label">Civilité</label>
@@ -116,7 +175,6 @@ if(isset($_POST['submit'])) {
             </div>
         </form>
     </div>
-
     <script src="../../bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"> </script>
     <script src="../../fontawesome/js/all.min.js"></script>
 </body>
