@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>PROCES VERBAL</title>
+    <style>
+    @page {
+        size: A4;
+        margin: 2cm;
+    }
+    
+    body {
+        font-family: Arial, sans-serif;
+        font-size: 12pt;
+        line-height: 1.5;
+    }
+    
+    h3 {
+        font-size: 14pt;
+        font-weight: bold;
+    }
+    
+    h3, p {
+        margin-top: 0;
+        margin-bottom: 10px;
+    }
+    
+    div, p {
+        text-align: justify;
+    }
+    
+    div.jury {
+        margin-left: 150px;
+    }
+    
+    div.header {
+        margin-top: 100px;
+        text-align: center;
+    }
+    
+    h3.inline {
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 5px;
+    }
+    
+    p.inline {
+        display: inline-block;
+        vertical-align: middle;
+    }
+    
+    p.underline {
+        text-decoration: underline;
+    }
+</style>
+	
+</head>
+<body>
+    <div>
+    <div class="header">
+    <h3>PROCES VERBAL</h3>
+    <h3>SOUTENANCE DE FIN D’ETUDES POUR L’OBTENTION DU DIPLOME DE LICENCE PROFESSIONNELLE</h3>
+    <div>
+        <h3 class="inline">Mention :</h3>
+        <p class="inline">Informatique</p>
+    </div>
+    <div>
+        <h3 class="inline">Parcours :</h3>
+        <p class="inline">Informatique général</p>
+    </div>
+</div>
+
+<div class="jury">
+    <p>Mr/Mlle RAKOTO Gilbert a soutenu publiquement son mémoire de fin d’études pour l’obtention du diplôme de Licence professionnelle.</p>
+    <p>Après la délibération, la commission des membres du Jury a attribué la note de 18/20 (dix-huit sur vingt).</p>
+    <p>Après la présentation orale de Mr/Mlle RAKOTO Gilbert et la délibération de la commission des membres du Jury, la note de 18/20 (dix-huit sur vingt) a été attribuée.</p>
+    <p class="underline">Membres du Jury</p>
+    <div>
+        <h3 class="inline">Président :</h3>
+        <p class="inline">Mr RATIARSON Venot, Maître de Conférences</p>
+    </div>
+    <div>
+        <h3 class="inline">Examinateur :</h3>
+        <p class="inline">Mr RALAIVAO Jean Christian, Assistant d’Enseignement Supérieur et de Recherche</p>
+    </div>
+    <div>
+        <h3 class="inline">Rapporteurs :</h3>
+        <p class="inline">Mlle RATIANANTITRA Volatiana Marielle, Maître de Conférences</p>
+    </div>
+</div>
+    
+</body>
+</html>
