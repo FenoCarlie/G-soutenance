@@ -3,14 +3,11 @@
 <head>
 	<meta charset="UTF-8">
 	<title>PROCES VERBAL</title>
-    <script src="./node_modules/jspdf/dist/jspdf.umd.min.js"></script>
-    <script src="./node_modules/html2canvas/dist/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.debug.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.4/jspdf.plugin.autotable.min.js"></script>
     
 <style>
-    @page {
-        size: A4;
-        margin: 2cm;
-    }
     
     body {
         font-family: Arial, sans-serif;
@@ -93,6 +90,7 @@
     </div>
     <button id="cmd">Générer PDF</button>
 </div>
-<script src="./js/pdf.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="./pdf.js"></script>
 </body>
 </html>
