@@ -3,6 +3,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>PROCES VERBAL</title>
+    <script src="./node_modules/jspdf/dist/jspdf.umd.min.js"></script>
+    <script src="./node_modules/html2canvas/dist/html2canvas.min.js"></script>
     
 <style>
     @page {
@@ -57,7 +59,7 @@
 
 	
 </head>
-<body>
+<body id="target">
     <div>
     <div class="header">
         <h3>PROCES VERBAL</h3>
@@ -89,7 +91,8 @@
         <h3 class="inline">Rapporteurs :</h3>
         <p class="inline">Mlle RATIANANTITRA Volatiana Marielle, Maître de Conférences</p>
     </div>
+    <button id="cmd">Générer PDF</button>
 </div>
-    
+<script src="./js/pdf.js"></script>
 </body>
 </html>
