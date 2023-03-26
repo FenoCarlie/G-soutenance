@@ -1,3 +1,21 @@
+<?php
+	if(isset($_POST['submit'])) {
+		$username = $_POST['Utilisateur'];
+		$password = $_POST['mot_de_passe'];
+
+		if(!empty($username) || !empty($password)) {
+			if ($username == 'admin' && $password == '1234') {
+				header('Location: ../admin/admin.php');
+				exit();
+			} else {
+				// Sinon, afficher un message d'erreur
+				echo '<script>alert("Nom d\'utilisateur ou mot de passe est eroner")</script>';
+			}
+		}else{
+			echo '<script>alert("les champt sont vide")</script>';
+		}
+	}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +30,7 @@
 			<h1>GESTION DES SOUTENANCES</h1>
 		</div>
 		<div class="login-content">
-			<form method="POST" action="login.php">
+			<form method="POST" action="">
 				<img src="img/avatar.svg">
 				<h2 class="title">Bienvenue</h2>
            		<div class="input-div one">
@@ -33,8 +51,8 @@
            		    	<input id="mot_de_passe" type="password" class="input" name="mot_de_passe">
             	   </div>
             	</div>
-            	<input type="submit" class="btn" value="connecter">
-				<input onclick="location.href='index.php';" type="buton" class="annuler" value="retour">
+				<button type="submit" class="btn" name="submit">connecter</button>
+				<input onclick="location.href='../index.php';" type="buton" class="annuler" value="retour">
             </form>
         </div>
     </div>

@@ -40,7 +40,7 @@
             </div>
             <div class="d-flex">
                 <ul class="navbar-nav">
-                    <a href="./login/index_login.php"><button type="button" class="btn btn-outline-dark">Connecter</button></a>
+                    <a href="../login/index_login.php"><button type="button" class="btn btn-outline-dark">Connecter</button></a>
                 </ul>
             </div>
         </div>

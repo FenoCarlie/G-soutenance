@@ -11,9 +11,14 @@
     <link href="../../bootstrap-5.0.2-dist/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="../../fontawesome/css/all.min.css" rel="stylesheet"/>
     <title>Document</title>
+    <style>
+        .navbar {
+            background-color: #2bc791;
+        }
+    </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
     <div class="container-fluid mt-2">
         <a class="navbar-brand" href="../admin.php">GESTION DES SOUTENANCES</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,6 +38,11 @@
             </li>
         </ul>
         </div>
+        <div class="d-flex">
+                <ul class="navbar-nav">
+                    <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">Deconecter</button>
+                </ul>
+            </div>
     </div>
     </nav>
     <div class="container mt-3">
@@ -92,6 +102,22 @@
                 echo '<div class="alert alert-dark mt-3" role="alert"><p class="h1">Aucun professeur inscrit</p></div>';
             }
         ?>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                    Êtes-vous sûr(e) de vouloir vous déconnecter ?
+                    </div>
+                    <div class="modal-footer">
+                        <a href="../index.php"><button type="button" class="btn btn-primary">oui</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <script src="../../fontawesome/js/all.min.js"></script>
     <script src="../../bootstrap-5.0.2-dist/js/bootstrap.min.js"></script>

@@ -10,9 +10,14 @@
     <link href="../../bootstrap-5.0.2-dist/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="../../fontawesome/css/all.min.css" rel="stylesheet"/>
     <title>Document</title>
+    <style>
+        .navbar {
+            background-color: #2bc791;
+        }
+    </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #e3f2fd;">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
     <div class="container-fluid mt-2">
         <a class="navbar-brand" href="../admin.php">GESTION DES SOUTENANCES</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,6 +37,11 @@
             </li>
         </ul>
         </div>
+        <div class="d-flex">
+                <ul class="navbar-nav">
+                    <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">Deconecter</button>
+                </ul>
+            </div>
     </div>
     </nav>
     <div class="container mt-3">
@@ -48,13 +58,25 @@
         
         <?php
 
-            $sql = "SELECT * FROM etudiant";
+            if(isset($_POST['search'])){
+                $search = mysqli_real_escape_string($conn, $_POST['search']);
+                $sql = "SELECT * FROM etudiant WHERE matricule LIKE '%$search%' OR nom LIKE '%$search%'";
+            } else {
+                $sql = "SELECT * FROM etudiant";
+            }
+
             $stmt = mysqli_prepare($conn, $sql);
             mysqli_stmt_execute($stmt);
             $result = mysqli_stmt_get_result($stmt);
 
             if (mysqli_num_rows($result) > 0) {
                 echo '<div class="text-center m-2 "><h1>TABLES ETUDIANT</h1></div>';
+                echo '<form action="" method="POST">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="search" placeholder="Rechercher par matricule ou nom">
+                            <button type="submit" class="btn btn-outline-secondary">Rechercher</button>
+                        </div>
+                    </form>';
                 echo '<table class="table table-hover text-center m-3">';
                 echo '<thead>';
                 echo '<tr class="table-dark">
@@ -95,7 +117,7 @@
                 echo '</tbody>';
                 echo '</table>';
             } else {
-                echo '<div class="alert alert-dark mt-3" role="alert"><p class="h1">Aucun étudiant inscrit</p></div>';
+                echo '<div class="alert alert-dark mt-3" role="alert"><p class="h1">Aucun résultat trouvé</p></div>';
             }
         ?>
         <!-- Modal -->
@@ -115,6 +137,22 @@
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                    Êtes-vous sûr(e) de vouloir vous déconnecter ?
+                    </div>
+                    <div class="modal-footer">
+                        <a href="../index.php"><button type="button" class="btn btn-primary">oui</button></a>
+                    </div>
                 </div>
             </div>
         </div>
