@@ -180,14 +180,14 @@ a:hover{
 	transition: .5s;
 }
 
-.annul{
+.annuler{
 	display: block;
 	width: 100%;
 	height: 50px;
 	border-radius: 25px;
 	outline: none;
 	border: none;
-	background-image: linear-gradient(to right, #32be8f, #38d39f, #32be8f);
+	background-image: linear-gradient(to right, #be3232, #d33838, #be3232);
 	background-size: 200%;
 	font-size: 1.2rem;
 	color: #fff;
@@ -202,7 +202,7 @@ a:hover{
 	background-position: right;
 }
 
-.annul:hover{
+.annuler:hover{
 	background-position: right;
 }
 

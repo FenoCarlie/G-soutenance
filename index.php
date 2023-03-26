@@ -22,11 +22,11 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark ">
         <div class="container-fluid mt-2">
-            <a class="navbar-brand" href="./admin.php">GESTION DES SOUTENANCES</a>
+            <a class="navbar-brand" href="index.php">GESTION DES SOUTENANCES</a>
             
             <div class="d-flex">
                 <ul class="navbar-nav">
-                    <a href="./login/login.php"><button type="button" class="btn btn-outline-dark">Connecter</button></a>
+                    <a href="./login/index_login.php"><button type="button" class="btn btn-outline-dark">Connecter</button></a>
                 </ul>
             </div>
         </div>
@@ -36,7 +36,7 @@
         <div class="row">
 
             <!-- Earnings (Monthly) Card Example -->
-            <a class="col-xl-3 col-md-6 mb-4" href="./table_admin/etudiant_admin.php" style="text-decoration: none; color: black;">
+            <a class="col-xl-3 col-md-6 mb-4" href="./table/etudiant.php" style="text-decoration: none; color: black;">
                 <div class="card border-left-primary shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
@@ -61,7 +61,7 @@
             </a>
 
             <!-- Earnings (Monthly) Card Example -->
-            <a class="col-xl-3 col-md-6 mb-4" href="./table_admin/organisme_admin.php" style="text-decoration: none; color: black;">
+            <a class="col-xl-3 col-md-6 mb-4" href="./table/organisme.php" style="text-decoration: none; color: black;">
                 <div class="card border-left-success shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
@@ -86,7 +86,7 @@
             </a>
 
             <!-- Earnings (Monthly) Card Example -->
-            <a class="col-xl-3 col-md-6 mb-4"href="./table_admin/professeur_admin.php" style="text-decoration: none; color: black;">
+            <a class="col-xl-3 col-md-6 mb-4"href="./table/professeur.php" style="text-decoration: none; color: black;">
                 <div class="card border-left-info shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
@@ -110,7 +110,7 @@
             </a>
 
             <!-- Pending Requests Card Example -->
-            <a class="col-xl-3 col-md-6 mb-4" href="./table_admin/soutenir_admin.php" style="text-decoration: none; color: black;">
+            <a class="col-xl-3 col-md-6 mb-4" href="./table/soutenir.php" style="text-decoration: none; color: black;">
                 <div class="card border-left-warning shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
@@ -193,7 +193,7 @@
                 <!-- Card Body -->
                 <div class="card-body">
                 <?php
-                    $sql = "SELECT niveau, COUNT(*) as effectif_total FROM etudiant GROUP BY niveau";
+                    $sql = "SELECT niveau, COUNT(*) as effectif_total FROM etudiant GROUP BY niveau ORDER BY niveau ASC";
                     $result = mysqli_query($conn, $sql);
 
                     echo '<table class="table table-hover text-center">';

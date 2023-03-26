@@ -26,7 +26,7 @@
             
             <div class="d-flex">
                 <ul class="navbar-nav">
-                    <button type="button" class="btn btn-outline-dark">Deconecter</button>
+                    <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">Deconecter</button>
                 </ul>
             </div>
         </div>
@@ -193,7 +193,7 @@
                 <!-- Card Body -->
                 <div class="card-body">
                 <?php
-                    $sql = "SELECT niveau, COUNT(*) as effectif_total FROM etudiant GROUP BY niveau";
+                    $sql = "SELECT niveau, COUNT(*) as effectif_total FROM etudiant GROUP BY niveau ORDER BY niveau ASC";
                     $result = mysqli_query($conn, $sql);
 
                     echo '<table class="table table-hover text-center">';
@@ -219,6 +219,23 @@
     </div>
 
 <!-- Content Row -->
+
+<!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+        Êtes-vous sûr(e) de vouloir vous déconnecter ?
+        </div>
+        <div class="modal-footer">
+            <a href="../index.php"><button type="button" class="btn btn-primary">oui</button></a>
+        </div>
+        </div>
+    </div>
+    </div>
 
     
     </div>
