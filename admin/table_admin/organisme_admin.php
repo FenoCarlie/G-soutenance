@@ -59,7 +59,7 @@
                 echo '<div class="text-center m-2 "><h1>TABLES ORGANISME</h1></div>';
                 echo '<table class="table table-hover text-center m-3">';
                 echo '<thead>';
-                echo '<tr>
+                echo '<tr class="table-dark">
                         <th scope="col">Designation</th>
                         <th scope="col">Lieu</th>
                         <th scope="col">action</th>

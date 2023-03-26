@@ -73,10 +73,16 @@ if(isset($_POST['submit'])) {
                 <div class="alert alert-danger"><?php echo htmlspecialchars($error_msg, ENT_QUOTES); ?></div>
             <?php endif; ?>
             <div class="row mb-3">
-                <div class="col">
-                    <label class="form-label">Matricule</label>
-                    <input type="text" class="form-control" name="matricule" placeholder="matricule" value="<?php if(isset($_POST['matricule'])) echo htmlspecialchars($_POST['matricule'], ENT_QUOTES); ?>">
-                </div>
+                <?php
+                    $id = $_GET['id'];
+                    $sql = "SELECT matricule as matricule_etudiant FROM etudiant WHERE id=$id ";
+                    $result = mysqli_query($conn, $sql);
+                    echo '<div class="col">';
+                    echo '<label class="form-label">Matricule</label>';
+                    echo '<input type="text" class="form-control" name="matricule" value="'. htmlspecialchars($row['matricule_etudiant']) .'">';
+                    echo '</div>';
+                ?>
+                
                 <div class="col">
                     <label class="form-label">Note</label>
                     <input type="number" class="form-control" name="note" placeholder="note" value="<?php if(isset($_POST['note'])) echo htmlspecialchars($_POST['note'], ENT_QUOTES); ?>">
@@ -111,6 +117,7 @@ if(isset($_POST['submit'])) {
                 $stmt = mysqli_prepare($conn, $sql);
                 mysqli_stmt_execute($stmt);
                 $result = mysqli_stmt_get_result($stmt);
+                $prof_sel = array ();
                 
                 if (mysqli_num_rows($result) > 0){
                     echo '<div class="col mt-3">';

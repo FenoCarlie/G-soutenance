@@ -62,12 +62,12 @@
         <h3>PROCES VERBAL</h3>
         <h3>SOUTENANCE DE FIN D’ETUDES POUR L’OBTENTION DU DIPLOME DE LICENCE PROFESSIONNELLE</h3>
         <div style="text-align: center;">
-            <h3 class="inline">Mention :</h3>
-            <p class="inline">Informatique</p>
+            <!--<h3 class="inline">Mention :</h3>-->
+            <div class="inline"><b>Mention :</b>Informatique</div>
         </div>
         <div style="text-align: center;">
-            <h3 class="inline">Parcours :</h3>
-            <p class="inline">Informatique général</p>
+            <!--<h3 class="inline">Parcours :</h3>-->
+            <div class="inline"> <b>Parcours :</b> Informatique général</div>
         </div>
     </div>
 
@@ -77,17 +77,15 @@
     <p>Après la délibération, la commission des membres du Jury a attribué la note de 18/20 (dix-huit sur vingt).</p>
     <p class="underline">Membres du Jury</p>
     <div>
-        <h3 class="inline">Président :</h3>
-        <p class="inline">Mr RATIARSON Venot, Maître de Conférences</p>
+        <!--<h3 class="inline">Président :</h3>-->
+        <div class="inline"><b>Président :</b> Mr RATIARSON Venot, Maître de Conférences</div>
     </div>
-    <div>
-        <h3 class="inline">Examinateur :</h3>
-        <p class="inline">Mr RALAIVAO Jean Christian, Assistant d’Enseignement Supérieur et de Recherche</p>
-    </div>
-    <div>
-        <h3 class="inline">Rapporteurs :</h3>
-        <p class="inline">Mlle RATIANANTITRA Volatiana Marielle, Maître de Conférences</p>
-    </div>
+        <!--<h3 class="inline">Examinateur :</h3>-->
+        <div class="inline"><b>Examinateur :</b> Mr RALAIVAO Jean Christian, Assistant d’Enseignement Supérieur et de Recherche</div>
+   
+        <!--<h3 class="inline">Rapporteurs :</h3>-->
+        <div class="inline"> <b>Rapporteurs :</b> Mlle RATIANANTITRA Volatiana Marielle, Maître de Conférences</div>
+   
     <button id="cmd">Générer PDF</button>
 </div>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>

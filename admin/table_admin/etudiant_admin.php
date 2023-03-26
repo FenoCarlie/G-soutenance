@@ -7,7 +7,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../../DataTables/datatables.min.css" rel="stylesheet"/>
     <link href="../../bootstrap-5.0.2-dist/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="../../fontawesome/css/all.min.css" rel="stylesheet"/>
     <title>Document</title>
@@ -58,7 +57,7 @@
                 echo '<div class="text-center m-2 "><h1>TABLES ETUDIANT</h1></div>';
                 echo '<table class="table table-hover text-center m-3">';
                 echo '<thead>';
-                echo '<tr>
+                echo '<tr class="table-dark">
                         <th scope="col">Matricule</th>
                         <th scope="col">Nom</th>
                         <th scope="col">Prénoms</th>

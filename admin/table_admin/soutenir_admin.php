@@ -70,7 +70,7 @@
                 echo '<div class="text-center m-2 "><h1>TABLES  SOUTENUE</h1></div>';
                 echo '<table class="table table-hover text-center m-3">';
                 echo '<thead>';
-                echo '<tr>
+                echo '<tr class="table-dark">
                         <th scope="col">Matricule</th>
                         <th scope="col">Etudiant</th>
                         <th scope="col">Parcour et Niveau</th>
