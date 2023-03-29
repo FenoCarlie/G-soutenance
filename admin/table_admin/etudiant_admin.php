@@ -18,31 +18,31 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark ">
-    <div class="container-fluid mt-2">
-        <a class="navbar-brand" href="../admin.php">GESTION DES SOUTENANCES</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-            <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Dropdown link
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <li><a class="dropdown-item" href="../table_admin/organisme_admin.php">organisme</a></li>
-                <li><a class="dropdown-item" href="../table_admin/professeur_admin.php">Professeur</a></li>
-                <li><a class="dropdown-item" href="../table_admin/soutenir_admin.php">soutenir</a></li>
-            </ul>
-            </li>
-        </ul>
-        </div>
-        <div class="d-flex">
-                <ul class="navbar-nav">
-                    <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">Deconecter</button>
+        <div class="container-fluid mt-2">
+            <a class="navbar-brand" href="../admin.php">GESTION DES SOUTENANCES</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Table
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <li><a class="dropdown-item" href="../table_admin/organisme_admin.php">organisme</a></li>
+                    <li><a class="dropdown-item" href="../table_admin/professeur_admin.php">Professeur</a></li>
+                    <li><a class="dropdown-item" href="../table_admin/soutenir_admin.php">soutenir</a></li>
                 </ul>
+                </li>
+            </ul>
             </div>
-    </div>
+            <div class="d-flex">
+                    <ul class="navbar-nav">
+                        <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">Deconecter</button>
+                    </ul>
+                </div>
+        </div>
     </nav>
     <div class="container mt-3">
         <?php
@@ -107,9 +107,9 @@
                                     <input type="hidden" name="id" value="' . htmlspecialchars($row['id']) . '">
                                     <button type="submit" class="btn btn-link"><i class="fa-solid fa-trash fs-5" style="color: #d12335;"></i></button>
                                 </form>
-                                <form action="../soutenance/soutenir.php?id='. htmlspecialchars($row["id"]) .'" method="POST">
+                                <form action="../add_new/add_soutenir.php?id='. htmlspecialchars($row["id"]) .'" method="POST">
                                     <input type="hidden" name="id" value="' . htmlspecialchars($row['id']) . '">
-                                    <button type="submit" class="btn btn-info">Soutenir</button>
+                                    <button type="submit" class="navbar btn btn-info">Soutenir</button>
                                 </form>
                             </td>
                         </tr>';
@@ -151,7 +151,7 @@
                     Êtes-vous sûr(e) de vouloir vous déconnecter ?
                     </div>
                     <div class="modal-footer">
-                        <a href="../index.php"><button type="button" class="btn btn-primary">oui</button></a>
+                        <a href="../../index.php"><button type="button" class="btn btn-primary">oui</button></a>
                     </div>
                 </div>
             </div>

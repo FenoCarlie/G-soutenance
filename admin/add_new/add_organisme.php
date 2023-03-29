@@ -44,12 +44,45 @@ if (isset($_POST['submit'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../bootstrap-5.0.2-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../fontawesome/css/all.min.css">
+    <style>
+        .navbar {
+            background-color: #2bc791;
+        }
+    </style>
 
     <title>add_organisme</title>
 </head>
 
 <body>
-    <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+        <div class="container-fluid mt-2">
+            <a class="navbar-brand" href="../admin.php">GESTION DES SOUTENANCES</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Table
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="../table_admin/organisme_admin.php">Etudiant</a></li>
+                            <li><a class="dropdown-item" href="../table_admin/professeur_admin.php">Professeur</a></li>
+                            <li><a class="dropdown-item" href="../table_admin/soutenir_admin.php">organisme</a></li>
+                            <li><a class="dropdown-item" href="../table_admin/soutenir_admin.php">soutenir</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="d-flex">
+                <ul class="navbar-nav">
+                    <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">Deconecter</button>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-4">
         <div class="text-center mb4">
             <h1>Ajouter des organisme à la liste</h1>
             <p>Complétez le formulaire ci-dessous pour ajouter un nouvel organisme</p>
@@ -77,6 +110,21 @@ if (isset($_POST['submit'])) {
                         <a href="../../admin.php" class="btn btn-danger">annuler</a>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                Êtes-vous sûr(e) de vouloir vous déconnecter ?
+                </div>
+                <div class="modal-footer">
+                    <a href="../../index.php"><button type="button" class="btn btn-primary">oui</button></a>
+                </div>
             </div>
         </div>
     </div>

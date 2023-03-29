@@ -1,5 +1,4 @@
 <?php require '../../require/connection_DB.php';
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,7 +27,7 @@
         <ul class="navbar-nav">
             <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Dropdown link
+                Table
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <li><a class="dropdown-item" href="../table_admin/etudiant_admin.php">etudiant</a></li>
@@ -57,12 +56,13 @@
         ?>
         <?php
 
-            $sql = "SELECT soutenir.id as s_id, soutenir.note as s_note, soutenir.annee_univ as s_annee_univ,
+            $sql = "SELECT soutenir.id as s_id, soutenir.note as s_note, soutenir.annee_univ as s_annee_univ, soutenir.rapporteur_ext as s_r_ext,
                            soutenir.matricule as s_matricule, etudiant.nom as e_nom, etudiant.prenoms as e_prenoms, etudiant.niveau as e_niveau, etudiant.parcours as e_parcours,
                            organisme.design as o_design,
                            p1.civilite as president_civilite, p1.nom as president_nom, p1.prenoms as president_prenoms,
                            p2.civilite as examinateur_civilite, p2.nom as examinateur_nom, p2.prenoms as examinateur_prenoms,
-                           p3.civilite as r_ext_civilite, p3.nom as r_ext_nom, p3.prenoms as r_ext_prenoms, soutenir.rapporteur_ext as s_r_ext
+                           p3.civilite as r_int_civilite, p3.nom as r_int_nom, p3.prenoms as r_int_prenoms, soutenir.rapporteur_int as s_r_int
+                           
             FROM soutenir
             JOIN etudiant ON soutenir.matricule = etudiant.matricule
             JOIN organisme ON soutenir.idorg = organisme.idorg
@@ -103,7 +103,7 @@
                             <td>' . htmlspecialchars($row['o_design']) . '</td>
                             <td>' . htmlspecialchars($row['president_civilite'] . ' ' . $row['president_nom']) .  ' ' . $row['president_prenoms'] .'</td>
                             <td>' . htmlspecialchars($row['examinateur_civilite'] . ' ' . $row['examinateur_nom']) .  ' ' . $row['examinateur_prenoms'] .'</td>
-                            <td>' . htmlspecialchars($row['r_ext_civilite'] . ' ' . $row['r_ext_nom']) .  ' ' . $row['r_ext_prenoms'] .'</td>
+                            <td>' . htmlspecialchars($row['r_int_civilite'] . ' ' . $row['r_int_nom']) .  ' ' . $row['r_int_prenoms'] .'</td>
                             <td>' . htmlspecialchars($row['s_r_ext']) . '</td>
                             <td>' . htmlspecialchars($row['s_note']) . '</td>
                             <td>' . htmlspecialchars($row['s_annee_univ']) . '</td>
@@ -118,7 +118,7 @@
                 echo '</tbody>';
                 echo '</table>';
             } else {
-                echo '<div class="alert alert-dark mt-3" role="alert"><p class="h1">Aucun étudiant inscrit</p></div>';
+                echo '<div class="alert alert-dark mt-3" role="alert"><p class="h1">Aucun soutenance inscrit</p></div>';
             }
         ?>
 
@@ -133,7 +133,7 @@
                     Êtes-vous sûr(e) de vouloir vous déconnecter ?
                     </div>
                     <div class="modal-footer">
-                        <a href="../index.php"><button type="button" class="btn btn-primary">oui</button></a>
+                        <a href="../../index.php"><button type="button" class="btn btn-primary">oui</button></a>
                     </div>
                 </div>
             </div>

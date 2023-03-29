@@ -28,7 +28,7 @@
         <ul class="navbar-nav">
             <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Dropdown link
+                Table
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <li><a class="dropdown-item" href="../table_admin/etudiant_admin.php">Etudiant</a></li>
@@ -109,7 +109,7 @@
                     Êtes-vous sûr(e) de vouloir vous déconnecter ?
                     </div>
                     <div class="modal-footer">
-                        <a href="../index.php"><button type="button" class="btn btn-primary">oui</button></a>
+                        <a href="../../index.php"><button type="button" class="btn btn-primary">oui</button></a>
                     </div>
                 </div>
             </div>

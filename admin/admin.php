@@ -144,33 +144,42 @@
                 <!-- Card Header - Dropdown -->
                 <div
                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">étudiants qui n’ont pas encore effectué de soutenance</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">notes des étudiants</h6>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
                     <div class="chart-area">
                         <?php
-                            $sql = "SELECT * FROM etudiant WHERE matricule NOT IN (SELECT matricule FROM soutenir)";
+                            $sql = "SELECT soutenir.note as s_note, soutenir.annee_univ as s_annee_univ,
+                            soutenir.matricule as s_matricule, etudiant.nom as e_nom, etudiant.prenoms as e_prenoms, etudiant.niveau as e_niveau, etudiant.parcours as e_parcours 
+                                    FROM soutenir
+                                    JOIN etudiant ON soutenir.matricule = etudiant.matricule";
                             $result = mysqli_query($conn, $sql);
                         ?>
                         <div slass="table-responsive">
-                            <table id="soutenance" class="table table-striped table-bordered">
+                            <table id="date" class="table table-striped table-bordered">
                             <thead>
                                 <tr class="table-dark">
                                     <th scope="col">Matricule</th>
                                     <th scope="col">Nom</th>
                                     <th scope="col">Prénom</th>
                                     <th scope="col">Niveau</th>
+                                    <th scope="col">Parcours</th>
+                                    <th scope="col">Note</th>
+                                    <th scope="col">Annee_univ</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
                                     while ($row = mysqli_fetch_assoc($result)) {
                                         echo '<tr>
-                                                <td>'. $row["matricule"] .'</td>
-                                                <td>'. $row["nom"] .'</td>
-                                                <td>'. $row["prenoms"] .'</td>
-                                                <td>'. $row["niveau"] .'</td>
+                                                <td>'. $row["s_matricule"] .'</td>
+                                                <td>'. $row["e_nom"] .'</td>
+                                                <td>'. $row["e_prenoms"] .'</td>
+                                                <td>'. $row["e_niveau"] .'</td>
+                                                <td>'. $row["e_parcours"] .'</td>
+                                                <td>'. $row["s_note"] .'</td>
+                                                <td>'. $row["s_annee_univ"] .'</td>
                                              </tr>';
                                     }
                                 ?>
@@ -220,6 +229,55 @@
 
 <!-- Content Row -->
 
+
+    <div class="row mt-4">
+        <!-- Area Chart -->
+        <div class="col-xl-8 col-lg-7">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div
+                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">étudiants qui n’ont pas encore effectué de soutenance</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="chart-area">
+                        <?php
+                            $sql = "SELECT * FROM etudiant WHERE matricule NOT IN (SELECT matricule FROM soutenir)";
+                            $result = mysqli_query($conn, $sql);
+                        ?>
+                        <div slass="table-responsive">
+                            <table id="soutenance" class="table table-striped table-bordered">
+                            <thead>
+                                <tr class="table-dark">
+                                    <th scope="col">Matricule</th>
+                                    <th scope="col">Nom</th>
+                                    <th scope="col">Prénom</th>
+                                    <th scope="col">Niveau</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                        echo '<tr>
+                                                <td>'. $row["matricule"] .'</td>
+                                                <td>'. $row["nom"] .'</td>
+                                                <td>'. $row["prenoms"] .'</td>
+                                                <td>'. $row["niveau"] .'</td>
+                                             </tr>';
+                                    }
+                                ?>
+                            </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
 <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -249,6 +307,11 @@
     <script>
         $(document).ready(function(){
             $('#soutenance').DataTable();
+        });
+    </script>
+    <script>
+        $(document).ready(function(){
+            $('#date').DataTable();
         });
     </script>
 </body>
