@@ -150,26 +150,26 @@ if(isset($_POST['submit'])) {
                     <label class="form-label">Année universitaire</label>
                     <input type="text" class="form-control" name="annee_univ" placeholder="yyyy-yyyy" value="<?php if(isset($_POST['annee_univ'])) echo htmlspecialchars($_POST['annee_univ'], ENT_QUOTES); ?>">
                 </div>
-            <?php
-                $sql = "SELECT * FROM organisme";
-                $stmt = mysqli_prepare($conn, $sql);
-                mysqli_stmt_execute($stmt);
-                $result = mysqli_stmt_get_result($stmt);
-                
-                if (mysqli_num_rows($result) > 0){
-                    echo '<div class="col">';
-                    echo '<label class="form-label">Organisme</label>';
-                    echo '<select class="form-select" aria-label="Default select example" name="idorg">';
-                    echo '<option disabled selected value="">Choisissez un organisme</option>';
-                    while($row = mysqli_fetch_assoc($result)){
-                        echo '<option value="'. htmlspecialchars($row['idorg']) .'">'. htmlspecialchars($row['design']) .'</option>';
+                <?php
+                    $sql = "SELECT * FROM organisme";
+                    $stmt = mysqli_prepare($conn, $sql);
+                    mysqli_stmt_execute($stmt);
+                    $result = mysqli_stmt_get_result($stmt);
+                    
+                    if (mysqli_num_rows($result) > 0){
+                        echo '<div class="col">';
+                        echo '<label class="form-label">Organisme</label>';
+                        echo '<select class="form-select" aria-label="Default select example" name="idorg">';
+                        echo '<option disabled selected value="">Choisissez un organisme</option>';
+                        while($row = mysqli_fetch_assoc($result)){
+                            echo '<option value="'. htmlspecialchars($row['idorg']) .'" '. (isset($_POST['idorg']) && $_POST['idorg'] == $row['idorg'] ? 'selected' : '') .'>'. htmlspecialchars($row['design']) .'</option>';
+                        }
+                        echo '</select>';
+                        echo '</div>';
+                    }else{
+                        echo '<div class="col"><label class="form-label">Organisme</label><input type="text" class="form-control" value="Pas d\'organisme inscrit" readonly></div>';
                     }
-                    echo '</select>';
-                    echo '</div>';
-                }else{
-                    echo '<div class="col"><label class="form-label">Organisme</label><input type="text" class="form-control" value="Pas d\'organisme inscrit" readonly></div>';
-                }
-            ?>
+                ?>
             </div>
             <?php
                 $sql = "SELECT * FROM professeur";
@@ -181,10 +181,15 @@ if(isset($_POST['submit'])) {
                 if (mysqli_num_rows($result) > 0){
                     echo '<div class="col mt-3">';
                     echo '<label class="form-label">Président des jurys</label>';
-                    echo '<select class="form-select" aria-label="Default select example" name="president" onchange="updateSelects()">';
+                    echo '<select class="form-select prof" aria-label="Default select example" name="president">';
                     echo '<option disabled selected value="">Choisissez un président des jurys</option>';
                     while($row = mysqli_fetch_assoc($result)){
-                        echo '<option value="'. htmlspecialchars($row['idprof']) .'">'. htmlspecialchars($row['civilite']) . ' ' . htmlspecialchars($row['nom']) . ' ' . htmlspecialchars($row['prenoms']) .'</option>';
+                        echo '<option value="'. htmlspecialchars($row['idprof']) .'"';
+                        if (isset($_POST['president']) && $_POST['president'] == htmlspecialchars($row['idprof'])) {
+                            echo ' selected';
+                        }
+                        echo '>'. htmlspecialchars($row['civilite']) . ' ' . htmlspecialchars($row['nom']) . ' ' . htmlspecialchars($row['prenoms']) .'</option>';
+                        
                     }
                     echo '</select>';
                     echo '</div>';
@@ -192,10 +197,14 @@ if(isset($_POST['submit'])) {
                 
                     echo '<div class="col mt-3">';
                     echo '<label class="form-label">Examinateur</label>';
-                    echo '<select class="form-select" aria-label="Default select example" name="examinateur" onchange="updateSelects()">';
+                    echo '<select class="form-select prof" aria-label="Default select example" name="examinateur">';
                     echo '<option disabled selected value="">Choisissez un examinateur</option>';
                     while($row = mysqli_fetch_assoc($result)){
-                        echo '<option value="'. htmlspecialchars($row['idprof']) .'">'. htmlspecialchars($row['civilite']) . ' ' . htmlspecialchars($row['nom']) . ' ' . htmlspecialchars($row['prenoms']) .'</option>';
+                        echo '<option value="'. htmlspecialchars($row['idprof']) .'"';
+                        if (isset($_POST['examinateur']) && $_POST['examinateur'] == htmlspecialchars($row['idprof'])) {
+                            echo ' selected';
+                        }
+                        echo '>'. htmlspecialchars($row['civilite']) . ' ' . htmlspecialchars($row['nom']) . ' ' . htmlspecialchars($row['prenoms']) .'</option>';
                     }
                     echo '</select>';
                     echo '</div>';
@@ -203,10 +212,15 @@ if(isset($_POST['submit'])) {
                 
                     echo '<div class="col mt-3">';
                     echo '<label class="form-label">Rapporteur interne</label>';
-                    echo '<select class="form-select" aria-label="Default select example" name="rapporteur_int" onchange="updateSelects()">';
+                    echo '<select class="form-select prof" aria-label="Default select example" name="rapporteur_int">';
                     echo '<option disabled selected value="">Choisissez un rapporteur interne</option>';
                     while($row = mysqli_fetch_assoc($result)){
-                        echo '<option value="'. htmlspecialchars($row['idprof']) .'">'. htmlspecialchars($row['civilite']) . ' ' . htmlspecialchars($row['nom']) . ' ' . htmlspecialchars($row['prenoms']) .'</option>';
+                        echo '<option value="'. htmlspecialchars($row['idprof']) .'"';
+                        if (isset($_POST['rapporteur_int']) && $_POST['rapporteur_int'] == htmlspecialchars($row['idprof'])) {
+                            echo ' selected';
+                        }
+                        echo '>'. htmlspecialchars($row['civilite']) . ' ' . htmlspecialchars($row['nom']) . ' ' . htmlspecialchars($row['prenoms']) .'</option>';
+                        
                     }
                     echo '</select>';
                     echo '</div>';
@@ -258,5 +272,6 @@ if(isset($_POST['submit'])) {
     </div>
     <script src="../../bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"> </script>
     <script src="../../fontawesome/js/all.min.js"></script>
+    <script src="../../js/select.js"></script>
 </body>
 </html>

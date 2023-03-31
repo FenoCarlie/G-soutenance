@@ -14,7 +14,7 @@ $(document).ready(function() {
             "elementHandlers":specialElementHandlers
         });
 
-        doc.save("sample-file.php");
+        doc.save("sample-file.pdf");
 
     });
 

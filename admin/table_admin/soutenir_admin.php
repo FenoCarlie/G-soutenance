@@ -108,7 +108,7 @@
                             <td>' . htmlspecialchars($row['s_note']) . '</td>
                             <td>' . htmlspecialchars($row['s_annee_univ']) . '</td>
                             <td style="row row-cols-auto">
-                                <form class="col" action="../soutenance/soutenir.php?id='. htmlspecialchars($row["s_id"]) .'" method="POST" style="display: inline">
+                                <form class="col" action="../../fpdf/generpdf.php?id='. htmlspecialchars($row["s_id"]) .'" method="POST" style="display: inline">
                                     <input type="hidden" name="id" value="' . htmlspecialchars($row['s_id']) . '">
                                     <button type="submit" class="btn btn-info">PDF</button>
                                 </form>

@@ -68,3 +68,42 @@ if (mysqli_num_rows($result) > 0) {
                         } else {
                             echo 'Aucun étudiant n\'a été trouvé.';
                         }
+
+
+
+
+                        function updateSelects() {
+  // Récupérer les éléments de sélection
+  const presidentSelect = document.querySelector('select[name="president"]');
+  const examinateurSelect = document.querySelector('select[name="examinateur"]');
+  const rapporteurSelect = document.querySelector('select[name="rapporteur_int"]');
+
+  // Récupérer les valeurs sélectionnées
+  const presidentValue = presidentSelect.value;
+  const examinateurValue = examinateurSelect.value;
+  const rapporteurValue = rapporteurSelect.value;
+
+  // Stocker les valeurs sélectionnées dans un tableau
+  const selectedValues = [presidentValue, examinateurValue, rapporteurValue];
+
+  // Parcourir les éléments de sélection
+  [presidentSelect, examinateurSelect, rapporteurSelect].forEach((select) => {
+    // Parcourir les options de chaque élément de sélection
+    [...select.options].forEach((option) => {
+  // Vérifier si l'option est sélectionnée
+  const isSelected = option.selected;
+  // Vérifier si l'option a une valeur
+  const hasValue = Boolean(option.value);
+  // Vérifier si l'option est déjà sélectionnée dans un autre élément de sélection
+  const isDuplicate = selectedValues.includes(option.value) && option.value !== '';
+
+  // Si l'option n'a pas de valeur ou est déjà sélectionnée dans un autre élément de sélection, la désélectionner
+  if (!hasValue || isDuplicate) {
+    option.selected = false;
+  }
+
+  // Si l'option a une valeur et n'est pas déjà sélectionnée dans un autre élément de sélection, la sélectionner
+  if (hasValue && !isDuplicate && !isSelected) {
+    option.selected = true;
+  }
+});
