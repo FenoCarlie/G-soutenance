@@ -1,6 +1,86 @@
 <?php
 require('fpdf.php');
 
+/**
+ * A class that allows us to generate a pdf
+ */
+class PDF extends FPDF
+{
+    public $test = "";
+
+                function Header()
+                {
+                   
+                    $parcours = "";
+                    switch ($this->test) {
+                    case 'IG':
+                    $parcours = "Informatique generale";
+                    break;
+                    case 'GB':
+                    $parcours = "Genie logiciel et base de donne";
+                    break;
+                    case 'SR':
+                    $parcours = "Administrateur system et reseau";
+                    break;
+                    }
+                    $this->Ln(9);
+                    // Police Arial gras 15
+                    $this->SetFont('Arial', '', 11);
+                    // Décalage
+                    $this->Cell(75);
+                    // Titre
+                    $this->Cell(30, 10, 'PROCES VERBAL');
+                    // Saut de ligne
+                    $this->Ln(15);
+
+                    // Police Arial gras 15
+                    $this->SetFont('Arial', '', 11);
+                    $this->Cell(10);
+                    // Titre
+                    $this->Cell(30, 10,utf8_decode('SOUTENANCE DE FIN D\'ETUDES POUR L\'OBTENTION DU DIPLOME DE LICENCE'));
+                    // Saut de ligne
+                    $this->Ln(9);
+
+                    // Police Arial gras 15
+                    $this->SetFont('Arial', '', 11);
+                    // Décalage
+                    $this->Cell(72);
+                    // Titre
+                    $this->Cell(30, 10,'PROFESSIONNELLE');
+                    // Saut de ligne
+                    $this->Ln(15);
+
+                    // Police Arial gras 15
+                    $this->SetFont('Arial', 'B', 11);
+                    // Décalage
+                    $this->Cell(70);
+                    // Titre
+                    $this->Cell(30, 10,'Mention :');
+                    // Police Arial gras 15
+                    $this->SetFont('Arial', '', 11);
+                    // Décalage
+                    $this->Cell(-10);
+                    // Titre
+                    $this->Cell(30, 10,'Informatique');
+                    // Saut de ligne
+                    $this->Ln(9);
+
+                    // Police Arial gras 15
+                    $this->SetFont('Arial', 'B', 11);
+                    // Décalage
+                    $this->Cell(57);
+                    // Titre
+                    $this->Cell(30, 10,'Parcours :');
+                    // Police Arial gras 15
+                    $this->SetFont('Arial', '', 11);
+                    // Décalage
+                    $this->Cell(-7);
+                    // Titre
+                    $this->Cell(30, 10,utf8_decode(''. $parcours .''));
+                    // Saut de ligne
+                    $this->Ln(10);
+                }
+            }
 
 $hostname = "localhost";
 $username = "root";
@@ -40,87 +120,17 @@ if(mysqli_num_rows($result) > 0){
     while($row = mysqli_fetch_assoc($result)){
 
             $etudiant = $row["e_nom"] . " " . $row["e_prenoms"];
-            $parcours = $row["e_nom"];
             $president = $row["president_civilite"] . " " . $row["president_nom"] . " " . $row["president_prenoms"] . "," . " " . $row["president_grade"];
             $examinateur = $row["examinateur_civilite"] . " " . $row["examinateur_nom"] . " " . $row["examinateur_prenoms"] . "," . " " . $row["examinateur_grade"];
             $rapporteur_int  = $row["r_int_civilite"] . " " . $row["r_int_nom"] . " " . $row["r_int_prenoms"] . "," . " " . $row["r_int_grade"];
             $rapporteur_ext = $row["s_r_ext"];
-
-            class PDF extends FPDF
-            {
-                function Header()
-                {
-                    $test = "";
-                    $parcours = "";
-                    switch ($test) {
-                    case 'IG':
-                    $parcours = "Informatique generale";
-                    break;
-                    case 'GB':
-                    $parcours = "Genie logiciel et base de donne";
-                    break;
-                    case 'SR':
-                    $parcours = "Administrateur system et reseau";
-                    break;
-                    }
-                    $this->Ln(9);
-                    // Police Arial gras 15
-                    $this->SetFont('Arial', '', 11);
-                    // Décalage
-                    $this->Cell(75);
-                    // Titre
-                    $this->Cell(30, 10, 'PROCES VERBAL');
-                    // Saut de ligne
-                    $this->Ln(15);
-
-                    // Police Arial gras 15
-                    $this->SetFont('Arial', '', 11);
-                    $this->Cell(10);
-                    // Titre
-                    $this->Cell(30, 10,'SOUTENANCE DE FIN D’ETUDES POUR L’OBTENTION DU DIPLOME DE LICENCE');
-                    // Saut de ligne
-                    $this->Ln(9);
-
-                    // Police Arial gras 15
-                    $this->SetFont('Arial', '', 11);
-                    // Décalage
-                    $this->Cell(72);
-                    // Titre
-                    $this->Cell(30, 10,'PROFESSIONNELLE');
-                    // Saut de ligne
-                    $this->Ln(15);
-
-                    // Police Arial gras 15
-                    $this->SetFont('Arial', 'B', 11);
-                    // Décalage
-                    $this->Cell(70);
-                    // Titre
-                    $this->Cell(30, 10,'Mention :');
-                    // Police Arial gras 15
-                    $this->SetFont('Arial', '', 11);
-                    // Décalage
-                    $this->Cell(-10);
-                    // Titre
-                    $this->Cell(30, 10,'Informatique');
-                    // Saut de ligne
-                    $this->Ln(9);
-
-                    // Police Arial gras 15
-                    $this->SetFont('Arial', 'B', 11);
-                    // Décalage
-                    $this->Cell(57);
-                    // Titre
-                    $this->Cell(30, 10,'Parcours :');
-                    // Police Arial gras 15
-                    $this->SetFont('Arial', '', 11);
-                    // Décalage
-                    $this->Cell(-7);
-                    // Titre
-                    $this->Cell(30, 10,''. $parcours .'');
-                    // Saut de ligne
-                    $this->Ln(10);
-                }
+            $niveau = $row["e_niveau"];
+            if ($niveau = 'L1' || $niveau = 'L1' ) {
+                # code...
+            } else {
+                # code...
             }
+            
 
             $note_chifre = $row["s_note"];
             $note_letre = "";
@@ -248,48 +258,49 @@ if(mysqli_num_rows($result) > 0){
             }
 
             $pdf = new PDF('P','mm','A4');
+            $pdf->test = $row["e_parcours"];
             $pdf->AddPage();
             $pdf->Ln(5);
             $pdf->SetFont('Arial','',);
-            $pdf->Cell(30,10,'Mr/Mlle '. $etudiant .'');
+            $pdf->Cell(30,10,utf8_decode('Mr/Mlle '. $etudiant .''));
             $pdf->Ln(10);
             $pdf->SetFont('Arial','',);
-            $pdf->Cell(30,10,'a soutenu publiquement son mémoire de fin d’études pour l’obtention du diplôme');
+            $pdf->Cell(30,10,utf8_decode('a soutenu publiquement son mémoire de fin d\'études pour l\'obtention du diplôme'));
             $pdf->Ln(7);
             $pdf->SetFont('Arial','',);
-            $pdf->Cell(30,10,'de Licence professionnelle');
+            $pdf->Cell(30,10,utf8_decode('de Licence professionnelle'));
             $pdf->Ln(10);
             $pdf->SetFont('Arial','',);
-            $pdf->Cell(30,10,'Après la délibération, la commission des membres du Jury a attribué la note de '. $note_chifre .'/20');
+            $pdf->Cell(30,10,utf8_decode('Après la délibération, la commission des membres du Jury a attribué la note de '. $note_chifre .'/20'));
             $pdf->Ln(7);
             $pdf->SetFont('Arial','',);
-            $pdf->Cell(30,10,'('. $note_letre .' sur vingt)');
+            $pdf->Cell(30,10,utf8_decode('('. $note_letre .' sur vingt)'));
             $pdf->Ln(13);
             $pdf->SetFont('Arial','',);
             $pdf->SetFont('', 'U');
             $pdf->Cell(30,10,'Membres du Jury');
             $pdf->Ln(13);
             $pdf->SetFont('Arial', 'B', 11);
-            $pdf->Cell(30, 10,'Président :');
+            $pdf->Cell(30, 10,utf8_decode('Président :'));
             $pdf->SetFont('Arial', '', 11);
-            $pdf->Cell(30, 10,''. $president .'');
+            $pdf->Cell(30, 10,utf8_decode(''. $president .''));
             $pdf->Ln(13);
             $pdf->SetFont('Arial', 'B', 11);
             $pdf->Cell(30, 10,'Examinateur :');
             $pdf->SetFont('Arial', '', 11);
-            $pdf->Cell(30, 10,''. $examinateur .'');
+            $pdf->Cell(30, 10,utf8_decode(''. $examinateur .''));
             $pdf->Ln(13);
             $pdf->SetFont('Arial', 'B', 11);
             $pdf->Cell(30, 10,'Rapporteurs :');
             $pdf->SetFont('Arial', '', 11);
-            $pdf->Cell(30, 10,''. $rapporteur_int .'');
+            $pdf->Cell(30, 10,utf8_decode(''. $rapporteur_int .''));
             $pdf->Ln(13);
             $pdf->Cell(30);
             $pdf->SetFont('Arial', '', 11);
-            $pdf->Cell(30, 10,''. $rapporteur_ext .'');
+            $pdf->Cell(30, 10,utf8_decode(''. $rapporteur_ext .''));
 
-
-            $pdf->Output('I', ''. $etudiant .'.pdf','true');
+            $nom_pdf = "proces verbal $etudiant";
+            $pdf->Output('I', ''. $nom_pdf .'.pdf','true');
                 }
             }
 else echo "Here I am";
