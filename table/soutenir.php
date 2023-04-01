@@ -91,6 +91,7 @@
                         <th scope="col">rapporteur externe</th>
                         <th scope="col">Note</th>
                         <th scope="col">Annee_univ</th>
+                        <th scope="col">Action</th>
                     </tr>';
                 echo '</thead>';
                 echo '<tbody>';

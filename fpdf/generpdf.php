@@ -6,28 +6,41 @@ require('fpdf.php');
  */
 class PDF extends FPDF
 {
-    public $test = "";
+    public $test_p = "";
+    public $test_n1 = "";
+    public $test_n2 = "";
 
                 function Header()
                 {
                    
                     $parcours = "";
-                    switch ($this->test) {
+                    switch ($this->test_p) {
                     case 'IG':
-                    $parcours = "Informatique generale";
+                    $parcours = "Informatique Général (IG)";
                     break;
                     case 'GB':
-                    $parcours = "Genie logiciel et base de donne";
+                    $parcours = "Génie logiciel et Bases de données (GB)";
                     break;
-                    case 'SR':
-                    $parcours = "Administrateur system et reseau";
+                    case 'ASR':
+                    $parcours = "Administrateur Système et Réseau (ASR)";
                     break;
                     }
+                    if ($this->test_n1 = 'L1' || 'L2' || 'L3') {
+                            $diplome = "LICENCE";
+                    }else {
+                        $diplome = "MASTER";
+                    }
+                    if ($this->test_n2 = 'L1' || 'L2' || 'M1') {
+                        $periode = "D'ANNÉE";
+                    } else {
+                        $periode = "D'ETUDES";
+                    }
+
                     $this->Ln(9);
                     // Police Arial gras 15
                     $this->SetFont('Arial', '', 11);
                     // Décalage
-                    $this->Cell(75);
+                    $this->Cell(80);
                     // Titre
                     $this->Cell(30, 10, 'PROCES VERBAL');
                     // Saut de ligne
@@ -35,16 +48,16 @@ class PDF extends FPDF
 
                     // Police Arial gras 15
                     $this->SetFont('Arial', '', 11);
-                    $this->Cell(10);
+                    $this->Cell(20);
                     // Titre
-                    $this->Cell(30, 10,utf8_decode('SOUTENANCE DE FIN D\'ETUDES POUR L\'OBTENTION DU DIPLOME DE LICENCE'));
+                    $this->Cell(30, 10,utf8_decode('SOUTENANCE DE FIN '. $periode .' POUR L\'OBTENTION DU DIPLOME DE '. $diplome .''));
                     // Saut de ligne
                     $this->Ln(9);
 
                     // Police Arial gras 15
                     $this->SetFont('Arial', '', 11);
                     // Décalage
-                    $this->Cell(72);
+                    $this->Cell(77);
                     // Titre
                     $this->Cell(30, 10,'PROFESSIONNELLE');
                     // Saut de ligne
@@ -53,7 +66,7 @@ class PDF extends FPDF
                     // Police Arial gras 15
                     $this->SetFont('Arial', 'B', 11);
                     // Décalage
-                    $this->Cell(70);
+                    $this->Cell(75);
                     // Titre
                     $this->Cell(30, 10,'Mention :');
                     // Police Arial gras 15
@@ -125,128 +138,143 @@ if(mysqli_num_rows($result) > 0){
             $rapporteur_int  = $row["r_int_civilite"] . " " . $row["r_int_nom"] . " " . $row["r_int_prenoms"] . "," . " " . $row["r_int_grade"];
             $rapporteur_ext = $row["s_r_ext"];
             $niveau = $row["e_niveau"];
-            if ($niveau = 'L1' || $niveau = 'L1' ) {
-                # code...
-            } else {
-                # code...
+            switch ($niveau) {
+                case 'L1':
+                    $motif = "d'année";
+                    $soutenance = "Licence professionnelle I";
+                    break;
+                case 'L2':
+                    $motif = "d'année";
+                    $soutenance = "Licence professionnelle II";
+                    break;
+                case 'L3':
+                    $motif = "d'études";
+                    $soutenance = "Licence professionnelle";
+                    break;
+                case 'M1':
+                    $motif = "d'année";
+                    $soutenance = "Master professionnelle I";
+                    break;
+                case 'M2':
+                    $motif = "d'études";
+                    $soutenance = "Master professionnelle";
+                    break;
             }
-            
-
             $note_chifre = $row["s_note"];
             $note_letre = "";
             switch ($note_chifre) {
                 case '1':
                     $note_letre = "Un";
                     break;
-                    case '1,5':
+                    case '1.5':
                     $note_letre = "Un virgule cinq";
                     break;
                 case '2':
                     $note_letre = "Deux";
                     break;
-                    case '2,5':
+                    case '2.5':
                     $note_letre = "Deux virgule cinq";
                     break;
                 case '3':
                     $note_letre = "Trois";
                     break;
-                    case '3,5':
+                    case '3.5':
                     $note_letre = "Troi virgule cinqs";
                     break;
                 case '4':
                     $note_letre = "Quatre";
                     break;
-                    case '4,5':
+                    case '4.5':
                     $note_letre = "Quat virgule cinqre";
                     break;
                 case '5':
                     $note_letre = "Cinq";
                     break;
-                    case '5,5':
+                    case '5.5':
                     $note_letre = "Cinq virgule cinq";
                     break;
                 case '6':
                     $note_letre = "Six";
                     break;
-                    case '6,5':
+                    case '6.5':
                     $note_letre = "Six virgule cinq" ;
                     break;
                 case '7':
                     $note_letre = "Sept";
                     break;
-                    case '7,5':
+                    case '7.5':
                     $note_letre = "Sept virgule cinq";
                     break;
                 case '8':
                     $note_letre = "Huit";
                     break;
-                    case '8,5':
+                    case '8.5':
                     $note_letre = "Huit virgule cinq";
                     break;
                 case '9':
                     $note_letre = "Neuf";
                     break;
-                    case '9,5':
+                    case '9.5':
                     $note_letre = "Neuf virgule cinq";
                     break;
                 case '10':
                     $note_letre = "Dix";
                     break;
-                    case '10,5':
+                    case '10.5':
                     $note_letre = "Dix virgule cinq";
                     break;
                 case '11':
                     $note_letre = "Onze";
                     break;
-                    case '11,5':
+                    case '11.5':
                     $note_letre = "Onze virgule cinq";
                     break;
                 case '12':
                     $note_letre = "Douze";
                     break;
-                    case '12,5':
+                    case '12.5':
                     $note_letre = "Douze virgule cinq";
                     break;
                 case '13':
                     $note_letre = "Treize";
                     break;
-                    case '13,5':
+                    case '13.5':
                     $note_letre = "Treize virgule cinq";
                     break;
                 case '14':
                     $note_letre = "Quatorze";
                     break;
-                    case '14,5':
+                    case '14.5':
                     $note_letre = "Quatorze virgule cinq";
                     break;
                 case '15':
                     $note_letre = "Quinze";
                     break;
-                    case '15,5':
+                    case '15.5':
                     $note_letre = "Quinze virgule cinq";
                     break;
                 case '16':
                     $note_letre = "Seize";
                     break;
-                    case '16,5':
+                    case '16.5':
                     $note_letre = "Seize virgule cinq";
                     break;
                 case '17':
                     $note_letre = "Dix-sept";
                     break;
-                    case '17,5':
+                    case '17.5':
                     $note_letre = "Dix-sept virgule cinq";
                     break;
                 case '18':
                     $note_letre = "Dix-huit";
                     break;
-                    case '18,5':
+                    case '18.5':
                     $note_letre = "Dix-huit virgule cinq";
                     break;
                 case '19':
                     $note_letre = "Dix-neuf";
                     break;
-                    case '19,5':
+                    case '19.5':
                     $note_letre = "Dix-neuf virgule cinq";
                     break;
                 case '20':
@@ -258,44 +286,55 @@ if(mysqli_num_rows($result) > 0){
             }
 
             $pdf = new PDF('P','mm','A4');
-            $pdf->test = $row["e_parcours"];
+            $pdf->test_p = $row["e_parcours"];
+            $pdf->test_n1 = $row["e_niveau"];
+            $pdf->test_n2 = $row["e_niveau"];
             $pdf->AddPage();
             $pdf->Ln(5);
             $pdf->SetFont('Arial','',);
+            $pdf->cell(10);
             $pdf->Cell(30,10,utf8_decode('Mr/Mlle '. $etudiant .''));
             $pdf->Ln(10);
             $pdf->SetFont('Arial','',);
-            $pdf->Cell(30,10,utf8_decode('a soutenu publiquement son mémoire de fin d\'études pour l\'obtention du diplôme'));
+            $pdf->cell(10);
+            $pdf->Cell(30,10,utf8_decode('a soutenu publiquement son mémoire de fin '. $motif .' pour l\'obtention du diplôme'));
             $pdf->Ln(7);
             $pdf->SetFont('Arial','',);
-            $pdf->Cell(30,10,utf8_decode('de Licence professionnelle'));
+            $pdf->cell(10);
+            $pdf->Cell(30,10,utf8_decode('de '. $soutenance .''));
             $pdf->Ln(10);
             $pdf->SetFont('Arial','',);
+            $pdf->cell(10);
             $pdf->Cell(30,10,utf8_decode('Après la délibération, la commission des membres du Jury a attribué la note de '. $note_chifre .'/20'));
             $pdf->Ln(7);
             $pdf->SetFont('Arial','',);
+            $pdf->cell(10);
             $pdf->Cell(30,10,utf8_decode('('. $note_letre .' sur vingt)'));
             $pdf->Ln(13);
             $pdf->SetFont('Arial','',);
+            $pdf->cell(10);
             $pdf->SetFont('', 'U');
             $pdf->Cell(30,10,'Membres du Jury');
             $pdf->Ln(13);
             $pdf->SetFont('Arial', 'B', 11);
+            $pdf->cell(10);
             $pdf->Cell(30, 10,utf8_decode('Président :'));
             $pdf->SetFont('Arial', '', 11);
             $pdf->Cell(30, 10,utf8_decode(''. $president .''));
             $pdf->Ln(13);
             $pdf->SetFont('Arial', 'B', 11);
+            $pdf->cell(10);
             $pdf->Cell(30, 10,'Examinateur :');
             $pdf->SetFont('Arial', '', 11);
             $pdf->Cell(30, 10,utf8_decode(''. $examinateur .''));
             $pdf->Ln(13);
             $pdf->SetFont('Arial', 'B', 11);
+            $pdf->cell(10);
             $pdf->Cell(30, 10,'Rapporteurs :');
             $pdf->SetFont('Arial', '', 11);
             $pdf->Cell(30, 10,utf8_decode(''. $rapporteur_int .''));
             $pdf->Ln(13);
-            $pdf->Cell(30);
+            $pdf->Cell(40);
             $pdf->SetFont('Arial', '', 11);
             $pdf->Cell(30, 10,utf8_decode(''. $rapporteur_ext .''));
 

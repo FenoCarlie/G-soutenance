@@ -113,7 +113,7 @@
             <div class="row mb-3">
                 <div class="col">
                     <label class="form-label">Nom</label>
-                    <input type="text" class="form-control" name="nom" placeholder="Nom" value="<?php if(isset($_POST['nom'])) echo $_POST['nom']; ?>">
+                    <input style="text-transform: uppercase;" type="text" class="form-control" name="nom" placeholder="Nom" value="<?php if(isset($_POST['nom'])) echo $_POST['nom']; ?>">
                 </div>
                 <div class="col">
                     <label class="form-label">Prénom</label>
@@ -136,7 +136,7 @@
                         <option disabled selected value="">Choisissez un grade</option>
                         <option value="Professeur titulaire" <?php if(isset($_POST['grade']) && $_POST['grade'] == 'Professeur titulaire') echo 'selected'; ?>>Professeur titulaire</option>
                         <option value="Maître de Conférences" <?php if(isset($_POST['grade']) && $_POST['grade'] == 'Maître de Conférences') echo 'selected'; ?>>Maître de Conférences</option>
-                        <option value="Assistant d’Enseignement Supérieur et de Recherche" <?php if(isset($_POST['grade']) && $_POST['grade'] == 'Assistant d’Enseignement Supérieur et de Recherche') echo 'selected'; ?>>Assistant d’Enseignement Supérieur et de Recherche</option>
+                        <option value="Assistant d’Enseignement Supérieur et de Recherche" <?php if(isset($_POST['grade']) && $_POST['grade'] == 'Assistant d\'Enseignement Supérieur et de Recherche') echo 'selected'; ?>>Assistant d’Enseignement Supérieur et de Recherche</option>
                         <option value="Docteur HDR" <?php if(isset($_POST['grade']) && $_POST['grade'] == 'Docteur HDR') echo 'selected'; ?>>Docteur HDR</option>
                         <option value="Docteur en Informatique" <?php if(isset($_POST['grade']) && $_POST['grade'] == 'Docteur en Informatique') echo 'selected'; ?>>Docteur en Informatique</option>
                         <option value="Doctorant en informatique" <?php if(isset($_POST['grade']) && $_POST['grade'] == 'Doctorant en informatique') echo 'selected'; ?>>Doctorant en informatique</option>

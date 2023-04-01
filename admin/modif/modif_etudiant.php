@@ -125,7 +125,7 @@ if (isset($_POST['submit'])) {
                     <label class="form-label">Parcours</label>
                     <select class="form-select" aria-label="Default select example" name="parcours">
                         <option value="GB" <?php if ($row['parcours'] == 'GB') echo 'selected'; ?>>GB</option>
-                        <option value="SR" <?php if ($row['parcours'] == 'SR') echo 'selected'; ?>>SR</option>
+                        <option value="SR" <?php if ($row['parcours'] == 'ASR') echo 'selected'; ?>>SR</option>
                         <option value="IG" <?php if ($row['parcours'] == 'IG') echo 'selected'; ?>>IG</option>
                     </select>
                 </div>

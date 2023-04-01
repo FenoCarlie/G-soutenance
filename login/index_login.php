@@ -52,7 +52,7 @@
             	   </div>
             	</div>
 				<button type="submit" class="btn" name="submit">connecter</button>
-				<input onclick="location.href='../index.php';" type="buton" class="annuler" value="retour" style="text-aligne: center;">
+				<button type="button" class="annuler" onclick="window.location.href = '../index.php';">Retour</button>
             </form>
         </div>
     </div>

@@ -122,7 +122,7 @@ if(isset($_POST['submit'])) {
                 </div>
                 <div class="col">
                     <label class="form-label">Nom</label>
-                    <input type="text" class="form-control" name="nom" placeholder="Nom" value="<?php if(isset($_POST['nom'])) echo htmlspecialchars($_POST['nom'], ENT_QUOTES); ?>">
+                    <input style="text-transform: uppercase;" type="text" class="form-control" name="nom" placeholder="Nom" value="<?php if(isset($_POST['nom'])) echo htmlspecialchars($_POST['nom'], ENT_QUOTES); ?>">
                 </div>
                 <div class="col">
                     <label class="form-label">Prénom</label>
@@ -146,7 +146,7 @@ if(isset($_POST['submit'])) {
                     <select class="form-select" aria-label="Default select example" name="parcours">
                         <option disabled selected value="">Choisissez une parcours</option>
                         <option value="GB" <?php if(isset($_POST['parcours']) && $_POST['parcours'] == 'GB') echo 'selected'; ?>>GB</option>
-                        <option value="SR" <?php if(isset($_POST['parcours']) && $_POST['parcours'] == 'SR') echo 'selected'; ?>>SR</option>
+                        <option value="ASR" <?php if(isset($_POST['parcours']) && $_POST['parcours'] == 'ASR') echo 'selected'; ?>>ASR</option>
                         <option value="IG" <?php if(isset($_POST['parcours']) && $_POST['parcours'] == 'IG') echo 'selected'; ?>>IG</option>
                     </select>
                 </div>
