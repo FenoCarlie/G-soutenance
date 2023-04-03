@@ -117,6 +117,13 @@
                 echo '</tbody>';
                 echo '</table>';
             } else {
+                echo '<div class="text-center m-2 "><h1>TABLES ETUDIANT</h1></div>';
+                echo '<form action="" method="POST">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="search" placeholder="Rechercher par matricule ou nom" value>
+                            <button type="submit" class="btn btn-outline-secondary">Rechercher</button>
+                        </div>
+                    </form>';
                 echo '<div class="alert alert-dark mt-3" role="alert"><p class="h1">Aucun résultat trouvé</p></div>';
             }
         ?>

@@ -34,6 +34,7 @@
                         <li><a class="dropdown-item" href="./etudiant.php">etudiant</a></li>
                         <li><a class="dropdown-item" href="./organisme.php">organisme</a></li>
                         <li><a class="dropdown-item" href="./professeur.php">Professeur</a></li>
+                        <li><a class="dropdown-item" href="./note.php">Note</a></li>
                     </ul>
                     </li>
                 </ul>

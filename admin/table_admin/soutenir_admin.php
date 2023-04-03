@@ -108,6 +108,14 @@
                             <td>' . htmlspecialchars($row['s_note']) . '</td>
                             <td>' . htmlspecialchars($row['s_annee_univ']) . '</td>
                             <td style="row row-cols-auto">
+                                <form class="col" action="../modif/modif_professeur.php?s_id='. htmlspecialchars($row["s_id"]) .'" method="POST" >
+                                    <input type="hidden" name="s_id" value="' . htmlspecialchars($row['s_id']) . '">
+                                    <button type="submit" class="btn btn-link" ><i class="fa-solid fa-pen-to-square fs-5" style="color: #2766d3;"></i></button>
+                                </form>
+                                <form class="col" action="../delet/delet_soutenir.php?s_id='. htmlspecialchars($row["s_id"]) .'" method="POST" onsubmit="return confirm(\'Êtes-vous sûr de vouloir supprimer cet professeur ?\')">
+                                    <input type="hidden" name="s_id" value="' . htmlspecialchars($row['s_id']) . '">
+                                    <button type="submit" class="btn btn-link"><i class="fa-solid fa-trash fs-5" style="color: #d12335;"></i></button>
+                                </form>
                                 <form class="col" action="../../fpdf/generpdf.php?id='. htmlspecialchars($row["s_id"]) .'" method="POST" style="display: inline">
                                     <input type="hidden" name="id" value="' . htmlspecialchars($row['s_id']) . '">
                                     <button type="submit" class="btn btn-info">PDF</button>

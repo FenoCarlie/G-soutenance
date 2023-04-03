@@ -24,12 +24,6 @@ if(isset($_POST['submit'])) {
         $prenoms = "";
     }
     $rapporteur_ext = $civilite. " " . $nom . " " . $prenoms;
-    
-    /*if (isset($_POST['civilite' . ' ' . 'nom' . ' ' . 'prenoms'])) {
-        $rapporteur_ext = $_POST['civilite' . ' ' . 'nom' . ' ' . 'prenoms'];
-    } else {
-        $rapporteur_ext = "";
-    }*/
     if (isset($_POST['examinateur'])) {
         $examinateur = $_POST['examinateur'];
     } else {
@@ -46,6 +40,8 @@ if(isset($_POST['submit'])) {
         $rapporteur_int = "";
     }
     $annee_univ = $_POST['annee_univ'];
+    $dates = explode('-', $annee_univ);
+    $annee_actuel = date("Y");
     $matricule = $_POST['matricule'];
     $note = $_POST['note'];
     
@@ -56,34 +52,43 @@ if(isset($_POST['submit'])) {
     } else {
         if (!is_numeric($note)) {
             $error_msg = "Veuillez entrer un nombre entier ou un nombre avec virgule Ex: 17 ou 17.5";
-        } else {
-            if (!($note >= 0 && $note <= 20)) {
-                $error_msg = "Note doit être comprise entre 0 et 20";
-            } else {
-                if (!preg_match("/^\d{4}-\d{4}$/", $annee_univ)) {
-                $error_msg = "Le format de l'année universitaire est incorrect, ex: 2000-2001";
                 } else {
-                    // vérifie si un enregistrement avec le même matricule existe déjà
-                    $stmt = $conn->prepare("SELECT * FROM soutenir WHERE matricule=?");
-                    $stmt->bind_param("s", $matricule);
-                    $stmt->execute();
-                    $result = $stmt->get_result();
-
-                    if ($result->num_rows > 0) {
-                        // un enregistrement avec le même matricule existe déjà
-                        $error_msg = "Un étudiant avec ce matricule existe déjà.";
+                    if (!($note >= 0 && $note <= 20)) {
+                        $error_msg = "Note doit être comprise entre 0 et 20";
                     } else {
-                        // insére un nouvel enregistrement
-                        $stmt = $conn->prepare("INSERT INTO soutenir(`matricule`, idorg, `annee_univ`, note, president, examinateur, rapporteur_int, `rapporteur_ext`)
-                                    VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-                        $stmt->bind_param("ssssssss", $matricule, $idorg, $annee_univ, $note, $president, $examinateur, $rapporteur_int, $rapporteur_ext);
-                        $stmt->execute();
-
-                        if($stmt->affected_rows > 0) {
-                            header("Location: ../table_admin/soutenir_admin.php?msg=Anregistrement reussite");
-                            exit();
+                        if (!preg_match("/^\d{4}-\d{4}$/", $annee_univ)) {
+                        $error_msg = "Le format de l'année universitaire est incorrect, ex: 2000-2001";
                         } else {
-                            echo "Erreur: " . $conn->error;
+                            if (count($dates) == 2) {
+                                $deb_date = intval($dates[0]);
+                                $fin_date = intval($dates[1]);
+                            
+                                if (($fin_date - $deb_date) == 1 && $fin_date > $deb_date && $deb_date < $annee_actuel){
+                            // vérifie si un enregistrement avec le même matricule existe déjà
+                            $stmt = $conn->prepare("SELECT * FROM soutenir WHERE matricule=?");
+                            $stmt->bind_param("s", $matricule);
+                            $stmt->execute();
+                            $result = $stmt->get_result();
+
+                            if ($result->num_rows > 0) {
+                                // un enregistrement avec le même matricule existe déjà
+                                $error_msg = "Un étudiant avec ce matricule existe déjà.";
+                            } else {
+                                // insére un nouvel enregistrement
+                                $stmt = $conn->prepare("INSERT INTO soutenir(`matricule`, idorg, `annee_univ`, note, president, examinateur, rapporteur_int, `rapporteur_ext`)
+                                            VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+                                $stmt->bind_param("ssssssss", $matricule, $idorg, $annee_univ, $note, $president, $examinateur, $rapporteur_int, $rapporteur_ext);
+                                $stmt->execute();
+
+                                if($stmt->affected_rows > 0) {
+                                    header("Location: ../table_admin/soutenir_admin.php?msg=Anregistrement reussite");
+                                    exit();
+                                } else {
+                                    echo "Erreur: " . $conn->error;
+                                }
+                            }
+                        }else {
+                            $error_msg = "La date n'est pas valide ou non successive : " . $annee_univ;
                         }
                     }
                 }
@@ -169,7 +174,7 @@ if(isset($_POST['submit'])) {
                 
                 <div class="col">
                     <label class="form-label">Note</label>
-                    <input type="text" class="form-control" name="note" placeholder="note" value="<?php if(isset($_POST['note'])) echo htmlspecialchars($_POST['note'], ENT_QUOTES); ?>">
+                    <input type="text" class="form-control" name="note" placeholder="Ex: 17 ou 17.5" value="<?php if(isset($_POST['note'])) echo htmlspecialchars($_POST['note'], ENT_QUOTES); ?>">
                 </div>
                 <div class="col">
                     <label class="form-label">Année universitaire</label>

@@ -2,7 +2,7 @@
     require '../../require/connection_DB.php';
 
     //crud delete
-    $id = $_GET['id'];
+    $id = $_GET['s_id'];
     $sql = "DELETE FROM `soutenir` WHERE id=$id ";
     $result = mysqli_query($conn, $sql);
     if ($result) {
