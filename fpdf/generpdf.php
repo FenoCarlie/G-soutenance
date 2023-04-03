@@ -104,10 +104,6 @@ if (mysqli_connect_errno()) {
     die("La connexion a échoué : " . mysqli_connect_error());}
 
 $id = $_GET['id'];
-$sql1 = "SELECT * FROM `soutenir` WHERE id = $id LIMIT 1";
-$result1 = mysqli_query($conn, $sql1);
-$row1 = mysqli_fetch_assoc($result1);
-
 $sql = "SELECT soutenir.note as s_note, soutenir.rapporteur_ext as s_r_ext,
 soutenir.matricule as s_matricule, etudiant.nom as e_nom, etudiant.prenoms as e_prenoms, etudiant.niveau as e_niveau, etudiant.parcours as e_parcours,
 p1.civilite as president_civilite,   p1.nom as president_nom,    p1.prenoms as president_prenoms,    p1.grade as president_grade,
@@ -119,7 +115,7 @@ JOIN etudiant ON soutenir.matricule = etudiant.matricule
 JOIN organisme ON soutenir.idorg = organisme.idorg
 JOIN professeur p1 ON soutenir.president = p1.idprof
 JOIN professeur p2 ON soutenir.examinateur = p2.idprof
-JOIN professeur p3 ON soutenir.rapporteur_int = p3.idprof";
+JOIN professeur p3 ON soutenir.rapporteur_int = p3.idprof WHERE soutenir.id = $id LIMIT 1";
 $stmt = mysqli_prepare($conn, $sql);
 if (!$stmt) {
     die(mysqli_error($conn));

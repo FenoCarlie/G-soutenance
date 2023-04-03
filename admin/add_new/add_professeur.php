@@ -82,9 +82,9 @@
                             Table
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="../table_admin/organisme_admin.php">Etudiant</a></li>
+                            <li><a class="dropdown-item" href="../table_admin/etudiant_admin.php">Etudiant</a></li>
                             <li><a class="dropdown-item" href="../table_admin/professeur_admin.php">Professeur</a></li>
-                            <li><a class="dropdown-item" href="../table_admin/soutenir_admin.php">organisme</a></li>
+                            <li><a class="dropdown-item" href="../table_admin/organisme_admin.php">organisme</a></li>
                             <li><a class="dropdown-item" href="../table_admin/soutenir_admin.php">soutenir</a></li>
                         </ul>
                     </li>
@@ -146,7 +146,7 @@
 
             <div>
                 <button type="submit" class="btn btn-success" name="submit">sauvegarder</button>
-                <a href="../../admin.php" class="btn btn-danger">annuler</a>
+                <a href="../../admin/add_new/add_professeur.php" class="btn btn-danger">annuler</a>
             </div>
         </form>
     </div>
