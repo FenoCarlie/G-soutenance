@@ -78,7 +78,59 @@
                 }
             
                 if (empty($date_in_deb) || empty($date_in_fin)) {
-                    $error_msg = "Les champs Matricule, nom, Niveau et Parcours sont obligatoires.";
+                    $error_msg = "Aucune date n'a été inscrite";
+                    $sql_deb = "SELECT soutenir.id as s_id, soutenir.note as s_note, soutenir.annee_univ as s_annee_univ,
+                soutenir.matricule as s_matricule, etudiant.nom as e_nom, etudiant.prenoms as e_prenoms, etudiant.niveau as e_niveau, etudiant.parcours as e_parcours
+                FROM soutenir
+                JOIN etudiant ON soutenir.matricule = etudiant.matricule";
+
+                $stmt_deb = mysqli_prepare($conn, $sql_deb);
+                mysqli_stmt_execute($stmt_deb);
+                $result_deb = mysqli_stmt_get_result($stmt_deb);
+
+                if (mysqli_num_rows($result_deb) > 0) {
+                    echo '<div class="text-center m-2 "><h1>TABLES ETUDIANT</h1></div>';
+                    $msg = htmlspecialchars($error_msg, ENT_QUOTES);
+                    echo '<div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                        '.$msg.'
+                          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                          </div>';
+                    echo '<form action="" method="POST">
+                            <div class="row">
+                                <div class="col">
+                                    <label class="form-label">Annee debut</label>
+                                    <input type="number" class="form-control" name="date_in_deb" placeholder="Ex: 2023" value="">
+                                </div>
+                                <div class="col">
+                                    <label class="form-label">Annee fin</label>
+                                    <input type="number" class="form-control" name="date_in_fin" placeholder="Ex: 2024" value="">
+                                </div>
+                                    <button type="submit" name="submit" class="btn btn-outline-secondary">Rechercher</button>
+                            </div>
+                        </form>';
+                    echo '<table class="table table-hover text-center m-3">';
+                    echo '<thead>';
+                    echo '<tr class="table-dark">
+                            <th scope="col">Annee_univ</th>
+                            <th scope="col">Matricule</th>
+                            <th scope="col">Etudiant</th>
+                            <th scope="col">Parcour et Niveau</th>
+                            <th scope="col">Note</th>
+                        </tr>';
+                    echo '</thead>';
+                    echo '<tbody>';
+                    while ($row = mysqli_fetch_assoc($result_deb)) {
+                        echo '<tr>
+                                <td>' . htmlspecialchars($row['s_annee_univ']) . '</td>
+                                <td>' . htmlspecialchars($row['s_matricule']) . '</td>
+                                <td>' . htmlspecialchars($row['e_nom'] . ' ' . $row['e_prenoms']) . '</td>
+                                <td>' . htmlspecialchars($row['e_parcours'] . ' en ' . $row['e_niveau']) . '</td>
+                                <td>' . htmlspecialchars($row['s_note']) . '</td>
+                            </tr>';
+                    }
+                    echo '</tbody>';
+                    echo '</table>';
+                }
                 } else {
                     if ($date_in_deb < $date_in_fin) {
                         list($date_deb, $date_fin) = DeuxDate("$date_in_deb-$date_in_fin");
@@ -118,7 +170,7 @@
                             echo '<tbody>';
                                 while($row = mysqli_fetch_assoc($result)) {
                                     $annee = explode ('-', $row['s_annee_univ']);
-                                    if ((($annee [0] >= $date_deb && $annee [0] < $date_fin) && ($annee [1] > $date_deb && $annee [1] <= $date_fin)) >= 1){
+                                    if ((($annee [0] >= $date_deb && $annee [0] < $date_fin) && ($annee [1] > $date_deb && $annee [1] <= $date_fin)) > 0){
                                         echo '<tr>
                                                 <td>' . $annee [0] . "-" . $annee [1] . '</td>
                                                 <td>' . $row['s_matricule'] . '</td>
@@ -126,66 +178,124 @@
                                                 <td>' . $row['e_parcours'] . ' ' . 'en' . ' ' . $row['e_niveau'] . '</td>
                                                 <td>' . $row['s_note'] . '</td>
                                             </tr>';
+                                    }else{
+                                        echo '<div class="alert alert-dark mt-3" role="alert"><p class="h1">Aucun résultat trouvé</p></div>';
+                                        break;
                                     }
                                 }
                             echo '</tbody>';
                             echo '</table>';
                             }
                     }else{
-                        echo "l'annee est incorecte";}
+                        $error_msg = "l'annee $date_in_deb-$date_in_fin est incorecte ";
+                        $sql_deb = "SELECT soutenir.id as s_id, soutenir.note as s_note, soutenir.annee_univ as s_annee_univ,
+                    soutenir.matricule as s_matricule, etudiant.nom as e_nom, etudiant.prenoms as e_prenoms, etudiant.niveau as e_niveau, etudiant.parcours as e_parcours
+                    FROM soutenir
+                    JOIN etudiant ON soutenir.matricule = etudiant.matricule";
+    
+                    $stmt_deb = mysqli_prepare($conn, $sql_deb);
+                    mysqli_stmt_execute($stmt_deb);
+                    $result_deb = mysqli_stmt_get_result($stmt_deb);
+    
+                    if (mysqli_num_rows($result_deb) > 0) {
+                        echo '<div class="text-center m-2 "><h1>TABLES ETUDIANT</h1></div>';
+                        $msg = htmlspecialchars($error_msg, ENT_QUOTES);
+                        echo '<div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                            '.$msg.'
+                              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                              </div>';
+                        echo '<form action="" method="POST">
+                                <div class="row">
+                                    <div class="col">
+                                        <label class="form-label">Annee debut</label>
+                                        <input type="number" class="form-control" name="date_in_deb" placeholder="Ex: 2023" value="">
+                                    </div>
+                                    <div class="col">
+                                        <label class="form-label">Annee fin</label>
+                                        <input type="number" class="form-control" name="date_in_fin" placeholder="Ex: 2024" value="">
+                                    </div>
+                                        <button type="submit" name="submit" class="btn btn-outline-secondary">Rechercher</button>
+                                </div>
+                            </form>';
+                        echo '<table class="table table-hover text-center m-3">';
+                        echo '<thead>';
+                        echo '<tr class="table-dark">
+                                <th scope="col">Annee_univ</th>
+                                <th scope="col">Matricule</th>
+                                <th scope="col">Etudiant</th>
+                                <th scope="col">Parcour et Niveau</th>
+                                <th scope="col">Note</th>
+                            </tr>';
+                        echo '</thead>';
+                        echo '<tbody>';
+                        while ($row = mysqli_fetch_assoc($result_deb)) {
+                            echo '<tr>
+                                    <td>' . htmlspecialchars($row['s_annee_univ']) . '</td>
+                                    <td>' . htmlspecialchars($row['s_matricule']) . '</td>
+                                    <td>' . htmlspecialchars($row['e_nom'] . ' ' . $row['e_prenoms']) . '</td>
+                                    <td>' . htmlspecialchars($row['e_parcours'] . ' en ' . $row['e_niveau']) . '</td>
+                                    <td>' . htmlspecialchars($row['s_note']) . '</td>
+                                </tr>';
+                        }
+                        echo '</tbody>';
+                        echo '</table>';
+                    }
+                    }
                 }
 
             }else{
+
                 $sql_deb = "SELECT soutenir.id as s_id, soutenir.note as s_note, soutenir.annee_univ as s_annee_univ,
                 soutenir.matricule as s_matricule, etudiant.nom as e_nom, etudiant.prenoms as e_prenoms, etudiant.niveau as e_niveau, etudiant.parcours as e_parcours
                 FROM soutenir
                 JOIN etudiant ON soutenir.matricule = etudiant.matricule";
-            }
-            $stmt_deb = mysqli_prepare($conn, $sql_deb);
-            mysqli_stmt_execute($stmt_deb);
-            $result_deb = mysqli_stmt_get_result($stmt_deb);
 
-            if (mysqli_num_rows($result_deb) > 0) {
-                echo '<div class="text-center m-2 "><h1>TABLES ETUDIANT</h1></div>';
-                echo '<form action="" method="POST">
-                        <div class="row">
-                            <div class="col">
-                                <label class="form-label">Annee debut</label>
-                                <input type="number" class="form-control" name="date_in_deb" placeholder="Ex: 2023" value="">
+                $stmt_deb = mysqli_prepare($conn, $sql_deb);
+                mysqli_stmt_execute($stmt_deb);
+                $result_deb = mysqli_stmt_get_result($stmt_deb);
+
+                if (mysqli_num_rows($result_deb) > 0) {
+                    echo '<form action="" method="POST">
+                            <div class="row">
+                                <div class="col">
+                                    <label class="form-label">Annee debut</label>
+                                    <input type="number" class="form-control" name="date_in_deb" placeholder="Ex: 2023" value="">
+                                </div>
+                                <div class="col">
+                                    <label class="form-label">Annee fin</label>
+                                    <input type="number" class="form-control" name="date_in_fin" placeholder="Ex: 2024" value="">
+                                </div>
+                                    <button type="submit" name="submit" class="btn btn-outline-secondary">Rechercher</button>
                             </div>
-                            <div class="col">
-                                <label class="form-label">Annee fin</label>
-                                <input type="number" class="form-control" name="date_in_fin" placeholder="Ex: 2024" value="">
-                            </div>
-                                <button type="submit" name="submit" class="btn btn-outline-secondary">Rechercher</button>
-                        </div>
-                    </form>';
-                echo '<table class="table table-hover text-center m-3">';
-                echo '<thead>';
-                echo '<tr class="table-dark">
-                        <th scope="col">Annee_univ</th>
-                        <th scope="col">Matricule</th>
-                        <th scope="col">Etudiant</th>
-                        <th scope="col">Parcour et Niveau</th>
-                        <th scope="col">Note</th>
-                    </tr>';
-                echo '</thead>';
-                echo '<tbody>';
-                while ($row = mysqli_fetch_assoc($result_deb)) {
-                    echo '<tr>
-                            <td>' . htmlspecialchars($row['s_annee_univ']) . '</td>
-                            <td>' . htmlspecialchars($row['s_matricule']) . '</td>
-                            <td>' . htmlspecialchars($row['e_nom'] . ' ' . $row['e_prenoms']) . '</td>
-                            <td>' . htmlspecialchars($row['e_parcours'] . ' en ' . $row['e_niveau']) . '</td>
-                            <td>' . htmlspecialchars($row['s_note']) . '</td>
+                        </form>';
+                    echo '<table class="table table-hover text-center m-3">';
+                    echo '<thead>';
+                    echo '<tr class="table-dark">
+                            <th scope="col">Annee_univ</th>
+                            <th scope="col">Matricule</th>
+                            <th scope="col">Etudiant</th>
+                            <th scope="col">Parcour et Niveau</th>
+                            <th scope="col">Note</th>
                         </tr>';
-                }
-                echo '</tbody>';
-                echo '</table>';
-            } else {
-                echo '<div class="alert alert-dark mt-3" role="alert"><p class="h1">Aucun résultat trouvé</p></div>';
-            }
-        ?>
+                    echo '</thead>';
+                    echo '<tbody>';
+                    while ($row = mysqli_fetch_assoc($result_deb)) {
+                        echo '<tr>
+                                <td>' . htmlspecialchars($row['s_annee_univ']) . '</td>
+                                <td>' . htmlspecialchars($row['s_matricule']) . '</td>
+                                <td>' . htmlspecialchars($row['e_nom'] . ' ' . $row['e_prenoms']) . '</td>
+                                <td>' . htmlspecialchars($row['e_parcours'] . ' en ' . $row['e_niveau']) . '</td>
+                                <td>' . htmlspecialchars($row['s_note']) . '</td>
+                            </tr>';
+                    }
+                    echo '</tbody>';
+                    echo '</table>';
+                } else {
+                    echo '<div class="alert alert-dark mt-3" role="alert"><p class="h1">Aucun résultat trouvé</p></div>';
+                            }
+                            
+                            }
+                        ?>
         <!-- Modal -->
         <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
             <div class="modal-dialog" role="document">
