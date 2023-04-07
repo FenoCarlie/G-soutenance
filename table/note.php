@@ -154,7 +154,9 @@
                                             <label class="form-label">Annee fin</label>
                                             <input type="number" class="form-control" name="date_in_fin" placeholder="Ex: 2024" value="">
                                         </div>
-                                            <button type="submit" name="test" class="btn btn-outline-secondary">Rechercher</button>
+                                    </div>
+                                    <div>
+                                        <button type="submit" name="test" class="btn btn-success">Rechercher</button>
                                     </div>
                                 </form>';
                             echo '<table class="table table-hover text-center m-3">';
@@ -214,8 +216,8 @@
                                         <label class="form-label">Annee fin</label>
                                         <input type="number" class="form-control" name="date_in_fin" placeholder="Ex: 2024" value="">
                                     </div>
-                                        <button type="submit" name="submit" class="btn btn-outline-secondary">Rechercher</button>
                                 </div>
+                                <button type="submit" name="submit" class="btn btn-outline-secondary">Rechercher</button>
                             </form>';
                         echo '<table class="table table-hover text-center m-3">';
                         echo '<thead>';
@@ -285,7 +287,7 @@
                                 <td>' . htmlspecialchars($row['s_matricule']) . '</td>
                                 <td>' . htmlspecialchars($row['e_nom'] . ' ' . $row['e_prenoms']) . '</td>
                                 <td>' . htmlspecialchars($row['e_parcours'] . ' en ' . $row['e_niveau']) . '</td>
-                                <td>' . htmlspecialchars($row['s_note']) . '</td>
+                                <td><b>' . htmlspecialchars($row['s_note']) . '</b></td>
                             </tr>';
                     }
                     echo '</tbody>';

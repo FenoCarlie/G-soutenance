@@ -34,6 +34,7 @@
                         <li><a class="dropdown-item" href="./etudiant.php">Etudiant</a></li>
                         <li><a class="dropdown-item" href="./organisme.php">organisme</a></li>
                         <li><a class="dropdown-item" href="./soutenir.php">soutenir</a></li>
+                        <li><a class="dropdown-item" href="./note.php">Note</a></li>
                     </ul>
                     </li>
                 </ul>

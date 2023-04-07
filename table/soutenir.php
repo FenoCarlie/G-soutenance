@@ -10,6 +10,7 @@
     <link href="../DataTables/datatables.min.css" rel="stylesheet"/>
     <link href="../bootstrap-5.0.2-dist/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="../fontawesome/css/all.min.css" rel="stylesheet"/>
+    <link href="../DataTables/DataTables-1.13.4/css/dataTables.bootstrap5.min.css" rel="stylesheet"/>
     <title>Document</title>
     <style>
         .navbar {
@@ -79,7 +80,7 @@
 
             if (mysqli_num_rows($result) > 0) {
                 echo '<div class="text-center m-2 "><h1>TABLES  SOUTENUE</h1></div>';
-                echo '<table class="table table-hover text-center m-3">';
+                echo '<table id="soutenance" class="table table-hover text-center m-3">';
                 echo '<thead>';
                 echo '<tr class="table-dark">
                         <th scope="col">Matricule</th>
@@ -145,5 +146,13 @@
     </div>
     <script src="../fontawesome/js/all.min.js"></script>
     <script src="../bootstrap-5.0.2-dist/js/bootstrap.min.js"></script>
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../DataTables/DataTables-1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="../DataTables/DataTables-1.13.4/js/dataTables.bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#soutenance').DataTable();
+        });
+    </script>
 </body>
 </html>
